@@ -1,0 +1,16 @@
+# The PDF, the assembled site and tectonic's logs.
+/build/
+
+# The original Overleaf export. src/ is the source of truth now, and a binary
+# copy of it would drift silently.
+*.zip
+
+# The 1.4 MB camera original behind src/assets/profile*.jpg. The 800x800
+# crops derived from it are committed; keeping the full frame out avoids
+# carrying a photo library in git. Delete it locally whenever you like.
+/me.jpg
+
+# Coding-agent session state, not part of the CV.
+/.omo/
+
+.DS_Store
