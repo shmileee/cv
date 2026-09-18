@@ -1,0 +1,28 @@
+% Oleksandr Ponomarov - curriculum vitae.
+%
+% Build with `mise run build`, which runs tectonic from this directory so
+% that every \input path below resolves relative to the document.
+%
+% This file is only the skeleton: the prose lives in content/ and the margin
+% column in sidebars/.
+
+\documentclass[10pt,a4paper,ragged2e]{altacv}
+
+\input{preamble}
+
+\begin{document}
+
+\input{content/header}
+
+% Bullet text sits one step below the headings around it.
+\AtBeginEnvironment{itemize}{\small}
+
+% The optional argument names the sidebar typeset in the margin next to this
+% section, so each section that opens a page carries its own margin column.
+\cvsection[sidebars/page1]{Experience}
+\input{content/experience-part1}
+
+\cvsection[sidebars/page2]{Experience}
+\input{content/experience-part2}
+
+\end{document}

@@ -1,0 +1,89 @@
+% Engine setup, palette and link handling.
+%
+% altacv.cls is vendored verbatim from upstream v1.1.5, so every deviation
+% from stock AltaCV lives in this file rather than in the class.
+
+\usepackage[english]{babel}
+
+% AltaCV puts the sidebar in the right margin, so the text block is narrow and
+% the margin is wide. marginparwidth + marginparsep must stay inside `right`
+% or the sidebar runs off the page edge.
+\geometry{
+  left           = 2cm,
+  right          = 10cm,
+  marginparwidth = 6.8cm,
+  marginparsep   = 1.2cm,
+  top            = 1.25cm,
+  bottom         = 1.25cm,
+}
+
+% Tectonic drives XeTeX, and fontspec resolves names against *installed system
+% fonts*. Lato is not installed on a CI runner, so it is loaded by file name
+% instead: those .ttf files ship inside the TeX Live bundle that tectonic
+% downloads, which is what makes a laptop build and a runner build identical.
+% Lato is also what upstream's pdfLaTeX branch selects, so the typeface is
+% unchanged from the original template.
+\ifxetexorluatex
+  \setmainfont{Lato}[
+    Extension      = .ttf,
+    UprightFont    = *-Regular,
+    BoldFont       = *-Bold,
+    ItalicFont     = *-Italic,
+    BoldItalicFont = *-BoldItalic,
+  ]
+\else
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+  \usepackage[default]{lato}
+\fi
+
+% ragged2e caps the right-hand slack at 2em, which is too tight for the dense
+% technology lists: two of them overran the text block by 5pt and 10pt rather
+% than wrapping one word earlier. More slack removes both overfull boxes.
+\setlength{\RaggedRightRightskip}{0pt plus 3em}
+
+% Monochrome palette. The class expects these four colour aliases; the names
+% below describe what they actually are, unlike the upstream template which
+% defined a "VividPurple" that was set to pure black.
+\definecolor{Ink}{HTML}{000000}
+\definecolor{Graphite}{HTML}{2E2E2E}
+\colorlet{heading}{Ink}
+\colorlet{accent}{Ink}
+\colorlet{emphasis}{Graphite}
+\colorlet{body}{Graphite}
+
+\renewcommand{\itemmarker}{{\small\textbullet}}
+\renewcommand{\ratingmarker}{\faCircle}
+
+% This PDF is read in a browser tab, so it carries real document metadata:
+% the title is what the tab and the download dialog show.
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+  pdftitle   = {Oleksandr Ponomarov - Curriculum Vitae},
+  pdfauthor  = {Oleksandr Ponomarov},
+  pdfsubject = {Senior DevOps Engineer},
+  pdflang    = {en},
+}
+
+% url.sty defaults \url to \ttfamily, and nothing else in this CV is
+% monospaced: the one footnote URL was being set in Latin Modern Mono against
+% a Lato page. `same` keeps it in the surrounding typeface while url.sty
+% still handles the line breaking.
+\urlstyle{same}
+
+% Deliberately no page numbers, even at three pages. The class sets
+% \pagestyle{empty}, and adding a footer here needs more than a pagestyle:
+% geometry's bottom=1.25cm leaves no band for one (the footer annotation
+% lands below the MediaBox), and ragged2e's finite \rightskip makes the
+% footer box underfull on every shipout. Both are fixable, but only by
+% retuning the page geometry this layout depends on.
+
+% Same glyphs and same text as the stock macros, but each contact detail is
+% now actionable for a reader who opens the CV on a screen. AltaCV v1.1.5
+% predates upstream's `withhyper` option, so the four macros are wrapped here.
+\renewcommand{\email}[1]{\printinfo{\emailsymbol}{\href{mailto:#1}{#1}}}
+\renewcommand{\phone}[1]{\printinfo{\phonesymbol}{\href{tel:#1}{#1}}}
+\renewcommand{\linkedin}[1]{%
+  \printinfo{\linkedinsymbol}{\href{https://www.linkedin.com/in/#1}{#1}}}
+\renewcommand{\github}[1]{%
+  \printinfo{\githubsymbol}{\href{https://github.com/#1}{#1}}}
