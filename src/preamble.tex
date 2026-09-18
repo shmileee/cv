@@ -42,6 +42,12 @@
 % than wrapping one word earlier. More slack removes both overfull boxes.
 \setlength{\RaggedRightRightskip}{0pt plus 3em}
 
+% The class sets itemsep=0.25\baselineskip. Across the ~30 bullets in this
+% document that padding alone costs most of a page, and the bullets are
+% single ideas that do not need the separation to stay legible. Tightening it
+% is what keeps the CV to two pages without deleting anything a reader wants.
+\setlist{itemsep=0.12\baselineskip}
+
 % Monochrome palette. The class expects these four colour aliases; the names
 % below describe what they actually are, unlike the upstream template which
 % defined a "VividPurple" that was set to pure black.
@@ -54,6 +60,14 @@
 
 \renewcommand{\itemmarker}{{\small\textbullet}}
 \renewcommand{\ratingmarker}{\faCircle}
+
+% The email glyph is an envelope rather than the stock \faAt. FontAwesome 4
+% names the "at" glyph `_475`, which xdvipdfmx cannot parse into a ToUnicode
+% entry, and it was the single source of the build's only warning -- every
+% other icon in this CV is clean. An envelope also matches the weight of the
+% phone, marker, LinkedIn and GitHub glyphs beside it; \faAt sat among them
+% as the odd one out. For a literal @ instead, use {@} here.
+\renewcommand{\emailsymbol}{\faEnvelope}
 
 % This PDF is read in a browser tab, so it carries real document metadata:
 % the title is what the tab and the download dialog show.
@@ -80,9 +94,10 @@
 
 % Same glyphs and same text as the stock macros, but each contact detail is
 % now actionable for a reader who opens the CV on a screen. AltaCV v1.1.5
-% predates upstream's `withhyper` option, so the four macros are wrapped here.
+% predates upstream's `withhyper` option, so the five macros are wrapped here.
 \renewcommand{\email}[1]{\printinfo{\emailsymbol}{\href{mailto:#1}{#1}}}
 \renewcommand{\phone}[1]{\printinfo{\phonesymbol}{\href{tel:#1}{#1}}}
+\renewcommand{\homepage}[1]{\printinfo{\homepagesymbol}{\href{https://#1}{#1}}}
 \renewcommand{\linkedin}[1]{%
   \printinfo{\linkedinsymbol}{\href{https://www.linkedin.com/in/#1}{#1}}}
 \renewcommand{\github}[1]{%
