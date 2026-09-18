@@ -1,56 +1,23 @@
-% Earlier roles. Margin column: sidebars/page2.
+% The dividing line is 2020: roles from the last five years get bullets,
+% everything before gets a sentence. Four compressed titles keep the timeline
+% unbroken without spending a third page on work that no longer represents
+% what I do.
+
+\cvevent{Senior DevOps Engineer}{S3 Connected Health}{August 2020 -- May 2021}{Wrocław, Poland}
+\begin{itemize}
+\item Built the delivery path for regulated medical software: the firmware pipeline behind an electroporation platform for treating gastrointestinal cancers, and a paediatric vision-therapy service shipping into Philips HealthSuite with security scanning in the way
+\item Put fifty-plus TypeScript repositories on staged rollouts, and wrote a project template so a new service arrived with delivery already working
+\item Described an on-premise lab as code, and ran hardened Kubernetes clusters on it
+\par\smallskip
+\textbf{Core}: Kubernetes, Terraform, Ansible, Argo CD, Drone, Python
+\end{itemize}
+
+\divider
 
 \cvevent{Senior DevOps Engineer}{Capgemini}{May 2019 -- July 2020}{Wrocław, Poland}
 \begin{itemize}
-\item Automated multi tenant deployments of Kafka \& Flink clusters
-\item Created custom Elastic Beats for Flink/Kafka
-\item Described infrastructure with Terraform and Ansible
-\item Created Jenkins pipeline to unseal production HashiCorp Vault cluster
-\item Introduced pipeline for deploying AWX onto OpenShift
-\item Configured reverse proxy, integrated with oauth2-proxy and SmartCard certificates
-\item Configured automated backups of the AWX data into self-hosted S3 (Minio)
-\item Containerized Java microservices
-\item Contributed to the Jenkins shared library for common CI/CD pipelines.
-\item Provisioned and maintained infrastructure applications for trading/risk systems.
+\item Automated multi-tenant Kafka and Flink infrastructure for trading and risk systems, described as code, and containerized the Java services running on it
+\item Built the pipeline that unseals a production secrets cluster, and put single sign-on with smart-card certificates in front of internal tooling
 \par\smallskip
-\textbf{Technologies}: Kubernetes, OpenShift, Jenkins, Ansible, AWX, Git, S3 (ECS/Minio), Consul, Gonsul, Envconsul, Vault, Zookeeper, Kafka, Kafka Manager, Kafka Security Manager, Flink, Artifactory, Nginx, M/Monit, MongoDB, Grafana, Collectd, BitBucket, ElasticSearch, Filebeat, Metricbeat, Kibana, Jolokia, Terraform
-\end{itemize}
-
-\divider
-
-\cvevent{DevOps Engineer}{Margo Consulting}{January 2018 -- April 2019}{Wrocław, Poland}
-\begin{itemize}
-\item Automated deployments with Ansible, custom modules and plugins
-\item Configured monitoring of deployed applications with Monit \& ELK stack
-\item Developed Bash/Python scripts for general purpose automation \& housekeeping utilities
-\item Built RPM packages using Make \& rpmbuild
-\item Refactored thousands of legacy configuration files -- extracted sensitive data into Vault that allowed the project to pass security audit
-\par\smallskip
-\textbf{Technologies}: Docker, TeamCity, Ansible, Subversion, Git Consul, Vault, Artifactory, Nginx, M/Monit, ELK, rpmbuild
-\end{itemize}
-
-\newpage
-
-\cvevent{Software Configuration Engineer}{Nokia Networks}{March 2017 -- January 2018}{Wrocław, Poland}
-\begin{itemize}
-\item Managed internal cloud infrastructure using IaC approach (Eucalyptus \& Ansible)
-\item Contributed to the development and maintenance of the distributed build environment (GNU Make)
-\item Contributed to the Subversion to Git (Gerrit) migration (company wide)
-\item Contributed to the release process automation (Python)
-\item Contributed to the development of a multi-threaded tool with custom YAML parser for removing files from filesystem and external object storage (Python)
-\item Configured custom Git hooks
-\par\smallskip
-\textbf{Technologies}: Docker, Jenkins, Ansible, GNU Make, GitLab CI, Python, Bash, Groovy, ELK, Git, Subversion, S3 (AWS), Gerrit, Eucalyptus, Cloudformation
-\end{itemize}
-
-\divider
-
-\cvevent{Test Engineer}{Tieto}{July 2016 -- February 2017}{Wrocław, Poland}
-\begin{itemize}
-\item Executed manual tests
-\item Set up, configured \& maintained project Jenkins servers
-\item Reported bugs / issues in JIRA
-\item Contributed to the build system automation and deployment enhancements
-\par\smallskip
-\textbf{Technologies}: Jenkins, SonarQube, Opengrok, Gerrit, ADB, Python, Bash
+\textbf{Core}: Kubernetes, OpenShift, Kafka, Flink, Vault, Terraform
 \end{itemize}

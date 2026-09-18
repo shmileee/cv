@@ -1,44 +1,37 @@
 % Current and most recent roles. Margin column: sidebars/page1.
+%
+% Two Hundred is the employer; the end client is named by what it does, not
+% by name. Apple is named because disclosure is permitted.
+%
+% The two Appsilon engagements are one entry: the second was a contract
+% running alongside Two Hundred, and the overlap is stated in the bullet
+% rather than left for the reader to spot in the dates.
+%
+% Bullets lead with the change, not the tool: a reader who has never heard of
+% Terramate should still understand what got better.
 
-\cvevent{Infrastructure Engineer}{Appsilon}{June 2021 -- Now}{Remotely, Poland}
+\cvevent{Senior Site Reliability Engineer}{Two Hundred, consulting for a global SaaS leader in construction IoT}{August 2022 -- Now}{Remote, Denmark}
 \begin{itemize}
-\item Designed and implemented high-availability deployments of RStudio products for Fortune 500 companies using IaC (Terraform \& Ansible) in AWS:
-\begin{itemize}
-\item created reusable code base adopted by various internal teams to spin up their own clusters with minimal effort
-\item contributed to the internal client's InfoSec team
-\end{itemize}
-\item Designed and implemented general cloud architectures for Data Science related projects using AWS \& Azure
-\item Migrated internal company's infrastructure to AWS:
-\begin{itemize}
-\item configured governance (Organizations, Cloudtrail, Config, SSM, SSO, etc.)
-\item configured cross-account IAM, effective budgeting + alerts / notifications, networking, etc.
-\item 95\% has been described using IaC approach
-\item introduced Atlantis for managing infrastructure through pull-requests
-\end{itemize}
-\item Supported R/Shiny developer teams with regular DevOps activities that include but are not limited to:
-\begin{itemize}
-\item designing efficient CI/CD pipelines
-\item containerization adoption
-\end{itemize}
-\item Conducted security awareness trainings
-\item Actively participated in the sales calls
-\item Introduced the concept of architectural decision records to the company that has been widely adopted
+\item Own the platform a few hundred engineers ship through, in front of a product serving thousands of requests per second. Joined when infrastructure was still changed by hand
+\item \textbf{Made every change reviewable.} Moved all infrastructure onto pull requests that show what will happen -- the plan for cloud resources, the exact cluster diff for everything else -- and only then turned on automatic deployment. The review bot I wrote for that is still commenting on pull requests three and a half years later
+\item \textbf{Environments on demand.} Designed and built cell-based architecture: one command creates a self-contained environment -- network, cluster, identity, delivery -- and one command proves it is gone, refusing to forget it while anything still runs. A new region became a reviewed change instead of a multi-week project
+\item \textbf{Rebuilt the network nobody dared touch.} Moved live production routing onto explicit, reviewable resources without applying a single change, then onto a policy-defined network where environments are genuinely separated
+\item \textbf{Turned the shared Terraform estate into a product.} Golden paths teams could actually follow: released and changelogged modules, a layout scaling to hundreds of environments, an internal registry, and the source code, chat, on-call and service catalogue of a new team created from one reviewed file
+\item \textbf{Raised the security posture by making it automatic.} Container images, dependency updates, cluster upgrades and machine patching became continuous flows with a human at the merge gate rather than quarterly fire drills, so staying patched stopped depending on anyone remembering. Secrets moved out of configuration and into a vault, and the checks that once took seven seconds now run in milliseconds, before you commit rather than minutes later in CI
+\item \textbf{Put AI to work without new attack surface.} Built the gateway that lets AI assistants reach operational systems through the identity people already have -- read-only in production, no new credentials anywhere -- and encoded change review into supervised playbooks that merge only what they can prove is safe, clearing a months-old backlog roughly twenty times faster than by hand
+\item \textbf{Cut cost where it hides.} Moved the whole organisation off Docker Hub onto our own mirror -- no migration day, no manifests to edit, nobody noticed, and the bill went away. Saved thousands a month more on the network path nobody looks at, and made cheaper processors the default. Also absorbed an acquisition onto the platform in a summer, and shipped self-service functions running customer code in isolation
 \par\smallskip
-\textbf{Technologies}: AWS, Azure, Terraform, Ansible, Docker, Git, Packer, Python \& Bash, Cloudflare
+\textbf{Core}: AWS, Kubernetes, Terraform \& Terramate, GitOps, Python \& Go
 \end{itemize}
 
 \divider
 
-\cvevent{Senior DevOps Engineer}{S3 Connected Health}{August 2020 -- May 2021}{Wrocław, Poland}
+\cvevent{Infrastructure Engineer}{Appsilon, consulting for Apple and Fortune 500 pharma}{June 2021 -- March 2024}{Remote, Poland}
 \begin{itemize}
-\item Created generic multi-step CI/CD pipelines for TypeScript project with over 50 repositories. Managed canary deployments into Philips HealthSuite Digital Platform. Integrated with proprietary security tools like Qualys \& Checkmarx
-\item Created multi-step CI/CD pipelines for C/C++ cross-compiled project. Introduced collection of custom pre-commit hooks to standardize code according to company's requirements
-\item Described on-prem lab with Terraform \& Ansible. Deployed hardened K3s clusters
-\item Created golden project template with generic CI/CD approach. Drone for CI, Argo for CD. A lot of Python/Bash glue \& Helm
-\item Introduced common approach for bootstrapping custom Docker images from scratch using templatable repositories. Python-based project
-\item Deployed EKS clusters with CloudFormation \& Ansible
-\item Created development environment based on Fedora Project using Vagrant, Ansible \& Packer
-\item Created custom BitBucket client in Python\footnote{\url{https://pypi.org/project/bitbucket-python-client}}
+\item Ran the analytics platform behind one of Apple's finance departments for eighteen months -- availability, patching, upgrades and InfoSec compliance -- on a contract overlapping the role above
+\item Before that, designed highly available analytics platforms for Fortune 500 pharma clients on AWS and Azure, entirely as code, leaving a reusable base other teams used to stand up their own
+\item Migrated the company's own infrastructure to AWS -- accounts, access, networking, budgets and alerting -- with 95\% of it as code and every change through a reviewed pull request
+\item Supported data-science teams with delivery pipelines and containerization, and joined client architecture and sales calls
 \par\smallskip
-\textbf{Technologies}: Kubernetes (EKS, K3s), Helm, Jenkins, Ansible, Git, Artifactory, BitBucket, Terraform, Packer, ArgoCD, AWS, Hyper-V, Drone, GNU Make, Conan, Docker, Python \& Bash, SonarQube, Qualys, Checkmarx, Cloudfoundry
+\textbf{Core}: AWS, Azure, Terraform, Ansible, Atlantis, Docker, Python
 \end{itemize}
