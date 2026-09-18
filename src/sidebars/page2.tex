@@ -1,37 +1,66 @@
-% Margin column beside the second Experience section.
+% Margin column for the second page, placed by \addnextpagesidebar.
+%
+% Infinite ragged-right slack: the preamble caps \RaggedRightRightskip at 3em
+% to keep the wide lines in the text block from overrunning it, which is far
+% too tight for prose in a 6.8cm margin. \raggedright is re-issued because
+% ragged2e's `newcommands` option aliases it to \RaggedRight, which reads the
+% length when it runs -- and the class already ran it at begin-document.
+\setlength{\RaggedRightRightskip}{0pt plus 1fil}\raggedright
 
-\cvsection{Principles}
-\smallskip
-\begin{itemize}
-\item Documentation is a first class citizen
-\smallskip
-\item Good commit hygiene is a must
-\smallskip
-\item Beg, steal or borrow ©
-\smallskip
-\item DRY, KISS, YAGNI
-\smallskip
-\end{itemize}
+% No itemize in this file. \addnextpagesidebar defers the \marginpar to the
+% next page break, which lands in the middle of the bullet list running down
+% the text block, and a list opened inside that marginpar fails with
+% "perhaps a missing \item". Bold lead-ins read the same and buy back the
+% indent, which is worth having in a column this narrow.
 
-\cvsection{Awards}
-\smallskip
-\begin{itemize}
-\item 1st at the Junior Worldwide FAI championship (Slovenia, 2012)
-\smallskip
-\item 1st at benchrest airgun shooting competitions (Ukraine, 2011)
-\smallskip
-\item PlayStation EU Community MVP and Beta Tester (May 2008 -- January 2009)
-\smallskip
-\item CCNA Routing and Switching: Introduction to Networks (2015)
-\smallskip
-\end{itemize}
+\cvsection{Education}
+\cvevent{MSc, Computer Science in Medicine}{Wrocław University of Science and Technology}{2017 -- 2019}{}
+\cvevent{BSc, Computer Science}{Wrocław University of Science and Technology}{2013 -- 2016}{}
 
-\cvsection{Interests}
-\begin{itemize}
-\item Improving my development environment
-\item Home automation, IoT
-\item Contributing to the open source community
-\item Video editing, movie making
-\item Conferences, meetups
-\item Aerial photography
-\end{itemize}
+\cvsection{Languages}
+\smallskip
+Ukrainian, Polish, English and Russian, all fluent.
+
+\cvsection{How I work}
+\smallskip
+\textbf{Decisions get written down.} I introduced decision records at two
+companies and wrote the standard for them.
+
+\smallskip
+\textbf{Measure, don't assert.} Benchmarks before rewrites, proof that a
+migration changes nothing before it runs, rehearsals before deletions.
+
+\smallskip
+\textbf{I teach what I build.} Community channels, recorded walkthroughs and
+regular sessions on what I have found -- lately on getting AI agents to do
+real work. Tooling without teaching just creates a new priesthood.
+
+\smallskip
+\textbf{Build it once, for everyone.} The hooks, templates and agent skills I
+write are meant to be picked up by teams I am not in the room with.
+
+\smallskip
+\textbf{Honesty over optics.} When a change of mine turns out wrong, the
+revert comes from me, the same week, with the root cause following.
+
+\smallskip
+\textbf{Automation over heroics.} Big mechanical migrations run as scripted,
+repeatable campaigns.
+
+% The first three years live in the margin rather than the text block. They
+% are a timeline, not an argument, and they were spending four lines of a
+% two-page document saying so.
+\cvsection{Earlier}
+\smallskip
+\textbf{Margo Consulting} -- DevOps Engineer, 2018--2019. Ansible automation,
+and moving secrets out of thousands of legacy configuration files, which is
+what passed the project's security audit.
+
+\smallskip
+\textbf{Nokia Networks} -- Software Configuration Engineer, 2017--2018.
+Internal cloud as code, the company's Subversion to Git migration, release
+automation.
+
+\smallskip
+\textbf{Tieto} -- Test Engineer, 2016--2017. Build automation and continuous
+integration servers.

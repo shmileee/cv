@@ -1,33 +1,96 @@
-% Margin column beside the first Experience section.
+% Margin column beside the first page.
+%
+% This began as \cvskill bars. Self-assigned five-out-of-fives tell a reader
+% nothing they can check, so the block names the ground covered instead and
+% lets the roles beside it carry the proof.
+%
+% Tags are dense here on purpose. The prose opposite stays concept-led and
+% mostly tool-free; this is the index a reader scans for the nouns, so it is
+% the one place where naming the technology is the point.
+%
+% Education and languages moved to the second page: this column needs the
+% whole page now.
+%
+% Infinite ragged-right slack, as in sidebars/page2: the preamble's 3em cap
+% cannot absorb a row of tag boxes that happens to fall short, and the class
+% already issued \raggedright before this file was read, so re-issue it.
+\setlength{\RaggedRightRightskip}{0pt plus 1fil}\raggedright
 
-\cvsection{Education}
-\cvevent{MSc, Computer Science in Medicine}{Wrocław University of Science and Technology}{January 2017 -- September 2019}{}
-\cvevent{BSc, Computer Science}{Wrocław University of Science and Technology}{October 2013 -- December 2016}{}
+\cvsection{Expertise}
+\smallskip
 
-\cvsection{Skills}
+\textbf{AWS}\par\smallskip
+\cvtag{EKS}
+\cvtag{Lambda}
+\cvtag{Step Functions}
+\cvtag{Cloud WAN}
+\cvtag{ECR}
+\cvtag{IAM}
+\cvtag{SSM}
+\cvtag{DynamoDB}
+\par\medskip
 
-\cvskill{Linux}{5}
-\cvskill{CI/CD}{5}
-\cvskill{Infrastructure as code}{5}
-\cvskill{Documentation}{5}
-\cvskill{Scrum}{5}
-\cvskill{Python, Shell}{5}
-\cvskill{Git}{5}
-\cvskill{Containers}{5}
-\cvskill{Troubleshooting, debugging}{5}
-\cvskill{AWS}{4}
-\cvskill{Kubernetes}{4}
-\cvskill{Monitoring}{4}
-\cvskill{Networking, DNS}{4}
-\cvskill{Design patterns}{3}
-\cvskill{Testing}{3}
-\cvskill{Build tools}{3}
-\cvskill{Databases}{2}
-\cvskill{Azure}{2}
+\textbf{Kubernetes and platform}\par\smallskip
+\cvtag{Flux}
+\cvtag{Argo CD}
+\cvtag{Crossplane}
+\cvtag{Karpenter}
+\cvtag{Kyverno}
+\cvtag{Helm}
+\cvtag{Strimzi}
+\par\medskip
 
-\divider
+\textbf{Infrastructure as code}\par\smallskip
+\cvtag{Terraform}
+\cvtag{Terramate}
+\cvtag{Atlantis}
+\cvtag{Ansible}
+\cvtag{Private registries}
+\par\medskip
 
-\cvskill{Russian}{5}
-\cvskill{Ukrainian}{5}
-\cvskill{English}{5}
-\cvskill{Polish}{5}
+\textbf{Delivery and developer experience}\par\smallskip
+\cvtag{GitOps}
+\cvtag{CI/CD}
+\cvtag{GitHub Actions}
+\cvtag{Pre-commit}
+\cvtag{Renovate}
+\cvtag{Release automation}
+\cvtag{Golden paths}
+\par\medskip
+
+\textbf{Security}\par\smallskip
+\cvtag{Policy as code}
+\cvtag{Secrets management}
+\cvtag{OIDC federation}
+\cvtag{Supply chain}
+\cvtag{Patch automation}
+\par\medskip
+
+\textbf{Networking and cost}\par\smallskip
+\cvtag{VPC design}
+\cvtag{DNS}
+\cvtag{Cost optimisation}
+\par\medskip
+
+\textbf{Data and streaming}\par\smallskip
+\cvtag{Kafka}
+\cvtag{Flink}
+\par\medskip
+
+\textbf{AI in production}\par\smallskip
+\cvtag{MCP gateways}
+\cvtag{Supervised agents}
+\cvtag{Agent skills}
+\par\medskip
+
+\textbf{Code}\par\smallskip
+\cvtag{Python}
+\cvtag{Go}
+\cvtag{Shell}
+\par\medskip
+
+\textbf{Working across teams}\par\smallskip
+\cvtag{Decision records}
+\cvtag{Standards}
+\cvtag{Knowledge sharing}
+\cvtag{Mentoring}
