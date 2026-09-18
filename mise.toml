@@ -1,0 +1,52 @@
+[settings]
+legacy_version_file = false
+
+[tools]
+# Tectonic is the entire LaTeX toolchain in a single ~20 MB binary: it pulls
+# only the packages this document actually uses out of a pinned TeX Live
+# bundle and caches them, instead of provisioning a multi-gigabyte
+# distribution. The version string carries the `tectonic@` prefix because the
+# repository also tags its component crates, so the release tag is not a bare
+# version number.
+"github:tectonic-typesetting/tectonic" = { version = "tectonic@0.17.0" }
+
+# Validation tooling, pinned to the same versions as shmileee/dotfiles so a
+# workstation that already has them installed reuses them here.
+"aqua:rhysd/actionlint" = "1.7.12"
+"aqua:zizmorcore/zizmor" = "1.30.0"
+"pipx:yamllint" = "1.38.0"
+gitleaks = "8.30.1"
+prek = "0.5.2"
+rumdl = "0.2.64"
+shellcheck = "0.11.0"
+shfmt = "3.14.0"
+taplo = "0.10.0"
+
+[tasks.build]
+description = "Compile the CV to build/cv.pdf"
+run = "./scripts/build.sh"
+
+[tasks.site]
+description = "Assemble the publishable site in build/site"
+run = "./scripts/build.sh --site"
+
+# Previews the assembled directory rather than the PDF alone, so the viewer
+# page is exercised exactly as GitHub Pages will serve it.
+[tasks.serve]
+description = "Serve build/site on http://localhost:8080"
+depends = ["site"]
+run = "python3 -m http.server 8080 --directory build/site"
+
+# `lint` is the single entry point for the hook suite, so CI runs this exact
+# task rather than its own prek invocation.
+[tasks.lint]
+description = "Run all prek hooks against the repository"
+run = "prek run --all-files --show-diff-on-failure"
+
+[tasks."prek:install"]
+description = "Install or refresh the prek Git shims for this checkout"
+run = "prek install --force"
+
+[tasks.clean]
+description = "Remove everything generated"
+run = "rm -rf build"
