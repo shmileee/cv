@@ -1,0 +1,45 @@
+---
+name: checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      # mise resolves the tectonic release through the GitHub API, which is
+      # rate limited for anonymous callers.
+      GITHUB_TOKEN: ${{ github.token }}
+      # prek detects no TTY here and would drop colour from hook output.
+      PREK_COLOR: always
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+
+      - name: set up mise
+        uses: jdx/mise-action@c2a87611a18de5b3828c5652fe268e992400cb5c # v4.3.0
+
+      - name: restore prek cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
+        with:
+          path: ~/.cache/prek
+          key: ${{ runner.os }}-prek-${{ hashFiles('mise.toml', '.pre-commit-config.yaml') }}
+          restore-keys: ${{ runner.os }}-prek-
+
+      - name: run hooks
+        run: mise run lint

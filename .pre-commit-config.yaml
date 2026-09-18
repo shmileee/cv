@@ -1,0 +1,100 @@
+---
+# Hook scheduling follows the same rule as shmileee/dotfiles: hooks that
+# rewrite files stay sequential, because end-of-file-fixer, trailing-whitespace
+# and mixed-line-ending touch *every* file and would drop a formatter's edits
+# if they overlapped. Read-only hooks share one priority and run concurrently;
+# prek runs the unprioritised group first, so they still observe the rewrites.
+#
+# Adding a hook: leave `priority` unset unless the hook never writes.
+priorities:
+  readonly: 100
+
+default_stages: [pre-commit]
+
+repos:
+  - repo: builtin
+    hooks:
+      - id: check-added-large-files
+        name: check added large files
+        priority: readonly
+      - id: check-case-conflict
+        name: check case conflicts
+        priority: readonly
+      - id: check-merge-conflict
+        name: check merge conflicts
+        priority: readonly
+      - id: check-symlinks
+        name: check symlinks
+        priority: readonly
+      - id: check-executables-have-shebangs
+        name: check executable shebangs
+        priority: readonly
+      - id: check-shebang-scripts-are-executable
+        name: check shebang scripts are executable
+        priority: readonly
+      - id: detect-private-key
+        name: detect private keys
+        priority: readonly
+      - id: end-of-file-fixer
+        name: fix end of files
+        # src/altacv.cls is vendored upstream code carrying exactly one
+        # documented local change. Reformatting it would bury that change in
+        # unrelated whitespace noise the next time it is compared to upstream.
+        exclude: ^src/altacv\.cls$
+      - id: trailing-whitespace
+        name: trim trailing whitespace
+        args: [--markdown-linebreak-ext=md]
+        exclude: ^src/altacv\.cls$
+      - id: mixed-line-ending
+        name: fix mixed line endings
+        exclude: ^src/altacv\.cls$
+
+  - repo: local
+    hooks:
+      - id: gitleaks
+        name: scan secrets with gitleaks
+        entry: gitleaks dir --redact --no-banner .
+        language: system
+        pass_filenames: false
+        priority: readonly
+      - id: shfmt
+        name: format shell with shfmt
+        entry: shfmt --write
+        language: system
+        files: \.sh$
+      - id: taplo
+        name: format toml with taplo
+        entry: taplo format
+        language: system
+        types: [toml]
+      - id: rumdl
+        name: format markdown with rumdl
+        entry: rumdl fmt --config .github/.rumdl.toml
+        language: system
+        types: [markdown]
+      - id: shellcheck
+        name: lint shell with shellcheck
+        entry: shellcheck
+        language: system
+        files: \.sh$
+        priority: readonly
+      - id: yamllint
+        name: lint yaml with yamllint
+        entry: yamllint --config-file .github/.yamllint.yaml
+        language: system
+        types: [yaml]
+        priority: readonly
+      - id: actionlint
+        name: lint github actions with actionlint
+        entry: actionlint
+        language: system
+        files: ^\.github/workflows/.*\.ya?ml$
+        types: [yaml]
+        priority: readonly
+      - id: zizmor
+        name: audit github actions with zizmor
+        entry: zizmor --min-severity medium --min-confidence medium
+        language: system
+        files: ^\.github/workflows/.*\.ya?ml$
+        types: [yaml]
+        priority: readonly
