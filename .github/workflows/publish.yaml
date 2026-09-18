@@ -1,0 +1,83 @@
+---
+name: publish
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: build pdf
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      # mise resolves the tectonic release through the GitHub API, which is
+      # rate limited for anonymous callers.
+      GITHUB_TOKEN: ${{ github.token }}
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+
+      - name: set up mise
+        uses: jdx/mise-action@c2a87611a18de5b3828c5652fe268e992400cb5c # v4.3.0
+
+      # tectonic fetches each LaTeX package it needs on first use and caches
+      # it here. Without this the runner re-downloads the whole set every run;
+      # the key covers the pinned tectonic version, which is what invalidates
+      # the bundle.
+      - name: restore tectonic bundle cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
+        with:
+          path: ~/.cache/Tectonic
+          key: ${{ runner.os }}-tectonic-${{ hashFiles('mise.toml') }}
+          restore-keys: ${{ runner.os }}-tectonic-
+
+      # Runs on pull requests too, so a change that breaks the document fails
+      # the check before it can reach the published site.
+      - name: build site
+        run: mise run site
+
+      - name: upload pages artifact
+        uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
+        with:
+          path: build/site
+
+  deploy:
+    name: deploy to github pages
+    needs: build
+    # Pull requests stop after the build: the PDF is validated, nothing is
+    # published.
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    permissions:
+      pages: write
+      id-token: write
+
+    # Pages serialises deployments, and a queued run must never cancel one
+    # that is already mid-deploy, so this group opts out of cancellation.
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: deploy
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
