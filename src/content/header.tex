@@ -1,7 +1,7 @@
 % Name block, photo and contact line.
 
 \name{Oleksandr Ponomarov}
-\tagline{Senior DevOps Engineer}
+\tagline{Platform \& Site Reliability Engineer}
 % The page is otherwise pure black and grey, so the greyscale crop is the
 % default. Swap in assets/profile.jpg for the colour original.
 \photo{4.3cm}{assets/profile-mono.jpg}
@@ -9,11 +9,20 @@
   \email{ponomarov.aleksandr@gmail.com}
   \phone{+48733462226}
   \location{Wrocław, Poland}
+  \homepage{oponomarov.com}
   \linkedin{aleksandr-ponomarov}
   \github{shmileee}%
 }
 
 % Run the header across the full page width, underneath the margin column.
+%
+% The summary rides inside the same fullwidth block on purpose. Set in the
+% 9cm text block it ran four lines and pushed the Experience heading -- and
+% with it the whole margin column, which starts level with that heading --
+% far enough down to open a conspicuous hole under the photo. At full width
+% it is two lines, and the margin picks up directly beneath the portrait.
 \begin{fullwidth}
 \makecvheader
+\smallskip
+\input{content/summary}
 \end{fullwidth}
