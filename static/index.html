@@ -2,61 +2,25 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- GitHub Pages cannot serve a PDF as a directory index and cannot issue
-         a redirect of its own, so this page is the redirect. Handing the file
-         straight to the browser beats embedding it: every visitor then reads
-         the CV in their own native PDF viewer, the one viewer guaranteed to
-         work on the device in hand. An embedded PDF is still only as good as
-         the platform underneath it - WebKit renders one frozen page of a
-         multi-page embed on iOS (bug 253671, open since 2023) - and no
-         property of the page can detect that, least of all the window width.
-
-         FitH is the one preference worth carrying over from that embed: it
-         fits the page to the window width, so a narrow window reads top to
-         bottom rather than sideways. Viewers that ignore the fragment are no
-         worse off than they were. -->
+    <!-- Pages serves index.html for a directory and nothing else, so this
+         redirect is what points the bare domain at the PDF. -->
     <meta http-equiv="refresh" content="0; url=cv.pdf#view=FitH" />
 
     <title>Oleksandr Ponomarov — CV</title>
-    <meta
-      name="description"
-      content="Curriculum vitae of Oleksandr Ponomarov, Senior DevOps Engineer."
-    />
-    <link rel="canonical" href="https://cv.oponomarov.com/" />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 
-    <!-- Link previews keep working because crawlers read this markup and do
-         not follow the refresh, so the card comes from here and not from the
-         PDF, which carries no metadata of its own. -->
-    <meta property="og:type" content="profile" />
+    <!-- Crawlers read this and do not follow the refresh, so a shared link
+         still previews as a name rather than a bare URL. -->
     <meta property="og:title" content="Oleksandr Ponomarov — CV" />
     <meta
       property="og:description"
       content="Curriculum vitae of Oleksandr Ponomarov, Senior DevOps Engineer."
     />
     <meta property="og:url" content="https://cv.oponomarov.com/" />
-    <meta name="twitter:card" content="summary" />
-
-    <style>
-      :root {
-        color-scheme: light dark;
-      }
-
-      body {
-        margin: 0;
-        padding: 2rem;
-        font-family:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-          Arial, sans-serif;
-      }
-    </style>
   </head>
 
   <body>
-    <!-- On screen only where the refresh never fires, and the plain link a
-         crawler follows when it declines to honour one. -->
-    <p>Opening <a href="cv.pdf#view=FitH">the CV</a>.</p>
+    <a href="cv.pdf#view=FitH">Open the CV</a>
   </body>
 </html>
