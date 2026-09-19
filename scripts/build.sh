@@ -34,8 +34,8 @@ Usage: ./scripts/build.sh [--site] [--keep-logs]
 
 Compile src/cv.tex into build/cv.pdf with tectonic.
 
---site       Also assemble build/site: the viewer page, the PDF it embeds and
-             the CNAME, exactly as the Pages workflow uploads them.
+--site       Also assemble build/site: the redirect page, the PDF it points at
+             and the CNAME, exactly as the Pages workflow uploads them.
 --keep-logs  Keep cv.log next to the PDF; useful when a run reports warnings.
 EOF
 }

@@ -21,7 +21,7 @@ mise run lint    # the prek hook suite
 ```text
 src/       cv.tex is the skeleton; content/ and sidebars/ hold the prose.
            altacv.cls is vendored, with its local changes documented inline
-static/    viewer page, favicon and CNAME
+static/    redirect to the PDF, favicon and CNAME
 scripts/   the build, called by mise and CI
 build/     generated
 ```

@@ -30,8 +30,8 @@ run = "./scripts/build.sh"
 description = "Assemble the publishable site in build/site"
 run = "./scripts/build.sh --site"
 
-# Previews the assembled directory rather than the PDF alone, so the viewer
-# page is exercised exactly as GitHub Pages will serve it.
+# Previews the assembled directory rather than the PDF alone, so the redirect
+# is exercised exactly as GitHub Pages will serve it.
 [tasks.serve]
 description = "Serve build/site on http://localhost:8080"
 depends = ["site"]
