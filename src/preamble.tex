@@ -92,9 +92,16 @@
 % footer box underfull on every shipout. Both are fixable, but only by
 % retuning the page geometry this layout depends on.
 
+% The class trails every contact entry with 2em. With six entries that wrapped
+% into a tidy 3+3; with four it left GitHub orphaned on a line of its own.
+% 1.5em is the widest gap that still fits all four on one line.
+\renewcommand{\printinfo}[2]{%
+  \mbox{\textcolor{accent}{\normalfont #1}\hspace{0.5em}#2\hspace{1.5em}}}
+
 % Same glyphs and same text as the stock macros, but each contact detail is
 % now actionable for a reader who opens the CV on a screen. AltaCV v1.1.5
-% predates upstream's `withhyper` option, so the five macros are wrapped here.
+% predates upstream's `withhyper` option, so they are wrapped here. \email and
+% \phone stay defined but unused, ready if a contact address is added back.
 \renewcommand{\email}[1]{\printinfo{\emailsymbol}{\href{mailto:#1}{#1}}}
 \renewcommand{\phone}[1]{\printinfo{\phonesymbol}{\href{tel:#1}{#1}}}
 \renewcommand{\homepage}[1]{\printinfo{\homepagesymbol}{\href{https://#1}{#1}}}
