@@ -4,6 +4,21 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    <!-- GitHub Pages cannot serve a PDF as a directory index and cannot issue
+         a redirect of its own, so this page is the redirect. Handing the file
+         straight to the browser beats embedding it: every visitor then reads
+         the CV in their own native PDF viewer, the one viewer guaranteed to
+         work on the device in hand. An embedded PDF is still only as good as
+         the platform underneath it - WebKit renders one frozen page of a
+         multi-page embed on iOS (bug 253671, open since 2023) - and no
+         property of the page can detect that, least of all the window width.
+
+         FitH is the one preference worth carrying over from that embed: it
+         fits the page to the window width, so a narrow window reads top to
+         bottom rather than sideways. Viewers that ignore the fragment are no
+         worse off than they were. -->
+    <meta http-equiv="refresh" content="0; url=cv.pdf#view=FitH" />
+
     <title>Oleksandr Ponomarov — CV</title>
     <meta
       name="description"
@@ -12,6 +27,9 @@
     <link rel="canonical" href="https://cv.oponomarov.com/" />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 
+    <!-- Link previews keep working because crawlers read this markup and do
+         not follow the refresh, so the card comes from here and not from the
+         PDF, which carries no metadata of its own. -->
     <meta property="og:type" content="profile" />
     <meta property="og:title" content="Oleksandr Ponomarov — CV" />
     <meta
@@ -24,124 +42,21 @@
     <style>
       :root {
         color-scheme: light dark;
-        /* The grey browsers themselves put behind an embedded PDF, so the
-           page and the viewer chrome do not disagree while the PDF loads. */
-        --backdrop: #525659;
-        --surface: #ffffff;
-        --ink: #1a1a1a;
-      }
-
-      /* The hand-off card pads a full-height box, so its padding has to sit
-         inside that height or the page gains a scrollbar with nothing below
-         the fold to scroll to. */
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-      }
-
-      html,
-      body {
-        height: 100%;
       }
 
       body {
         margin: 0;
-        background: var(--backdrop);
+        padding: 2rem;
         font-family:
           -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
           Arial, sans-serif;
-      }
-
-      .viewer {
-        display: block;
-        width: 100%;
-        height: 100%;
-        border: 0;
-      }
-
-      /* Shown only where an embedded PDF is not usable: iOS and Android
-         render it as a blank box or a single frozen page, so those visitors
-         get a deliberate hand-off to the file instead. */
-      .handoff {
-        display: none;
-        min-height: 100%;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 0.35rem;
-        padding: 2rem 1.5rem;
-        text-align: center;
-      }
-
-      .handoff h1 {
-        margin: 0;
-        font-size: 1.4rem;
-        color: var(--surface);
-      }
-
-      .handoff p {
-        margin: 0;
-        color: #c8ccd2;
-      }
-
-      .handoff .button {
-        margin-top: 1.4rem;
-        padding: 0.85rem 1.6rem;
-        border-radius: 8px;
-        background: var(--surface);
-        color: var(--ink);
-        font-weight: 600;
-        text-decoration: none;
-      }
-
-      .handoff .secondary {
-        margin-top: 0.9rem;
-        color: #c8ccd2;
-        font-size: 0.9rem;
-      }
-
-      .inline-fallback {
-        padding: 2rem;
-        color: var(--surface);
-        text-align: center;
-      }
-
-      @media (max-width: 760px) {
-        .viewer {
-          display: none;
-        }
-
-        .handoff {
-          display: flex;
-        }
       }
     </style>
   </head>
 
   <body>
-    <object
-      class="viewer"
-      type="application/pdf"
-      data="cv.pdf#view=FitH"
-      title="Oleksandr Ponomarov — curriculum vitae"
-    >
-      <p class="inline-fallback">
-        This browser cannot display PDFs inline.
-        <a href="cv.pdf">Open the CV</a>.
-      </p>
-    </object>
-
-    <main class="handoff">
-      <h1>Oleksandr Ponomarov</h1>
-      <p>Senior DevOps Engineer</p>
-      <a class="button" href="cv.pdf">Open the CV</a>
-      <a
-        class="secondary"
-        href="cv.pdf"
-        download="Oleksandr-Ponomarov-CV.pdf"
-        >Download the PDF</a
-      >
-    </main>
+    <!-- On screen only where the refresh never fires, and the plain link a
+         crawler follows when it declines to honour one. -->
+    <p>Opening <a href="cv.pdf#view=FitH">the CV</a>.</p>
   </body>
 </html>
