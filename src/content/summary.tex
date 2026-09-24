@@ -1,8 +1,33 @@
 % Three lines under the header, for the reader who will not reach page two:
 % what the job is, how long, and where the evidence lives.
+%
+% The first clause carries the two nouns a reviewer screens on, AWS and
+% Kubernetes, rather than saving them for the margin column.
+%
+% The site gets its own line rather than trailing the paragraph, because a
+% bare domain set in body text reads as prose and nobody clicks it.
+%
+% \printinfo carries only the domain, so the chain glyph sits against the link
+% it labels rather than leading the whole line. It is the same macro and the
+% same glyph as the homepage entry in the contact line above, so the icon and
+% its 0.5em gap match the header instead of being re-invented here, and the
+% \mbox inside it keeps the glyph from ever being orphaned from the domain by
+% a line break. The label stays outside, where it is free to break.
+%
+% hyperref runs with `hidelinks', so the glyph and the monospace are the only
+% affordances the link gets; there is no second color on this page to spend.
+% \texttt is Plex Mono, set in the preamble -- the domain reads as a token to
+% be copied rather than as prose, which is what the chain glyph promises. Not
+% bolded as well: mono already separates it, and both at once reads heavy.
+%
+% No full stop after the domain: it ends up inside the string when a reader
+% copies the line.
 
-I build the platform other engineers build on -- the systems that make
-infrastructure changes safe to review, quick to ship and possible to undo.
-Ten years in infrastructure, the last four owning the foundation a few hundred
-engineers deploy through. Case studies and writing:
-\href{https://oponomarov.com}{oponomarov.com}.
+I build the systems other engineers ship through: infrastructure as code,
+GitOps delivery, and the review gates that make a change safe to approve and
+possible to undo. Ten years in infrastructure, the last four owning the AWS
+and Kubernetes foundation a few hundred engineers deploy through.
+
+\smallskip
+Case studies and writing:
+\printinfo{\homepagesymbol}{\href{https://oponomarov.com}{\texttt{oponomarov.com}}}

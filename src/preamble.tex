@@ -31,6 +31,23 @@
     ItalicFont     = *-Italic,
     BoldItalicFont = *-BoldItalic,
   ]
+
+  % IBM Plex Mono, for the single inline-code span in the document: the site
+  % domain under the summary. Loaded by file name for the same reason as Lato
+  % above, out of the pinned bundle, so a laptop and a CI runner resolve the
+  % identical font. Plex Mono is also what oponomarov.com sets its own code
+  % column in, which is the point -- the CV and the site it points at should
+  % render that domain the same way.
+  %
+  % Scale=MatchLowercase is load-bearing. Plex Mono's lowercase runs larger
+  % than Lato's at the same nominal size, and without the match the domain
+  % sits a visible step bigger than the words introducing it.
+  \setmonofont{IBMPlexMono}[
+    Extension   = .otf,
+    UprightFont = *-Regular,
+    BoldFont    = *-Bold,
+    Scale       = MatchLowercase,
+  ]
 \else
   \usepackage[utf8]{inputenc}
   \usepackage[T1]{fontenc}
@@ -48,7 +65,7 @@
 % is what keeps the CV to two pages without deleting anything a reader wants.
 \setlist{itemsep=0.12\baselineskip}
 
-% Monochrome palette. The class expects these four colour aliases; the names
+% Monochrome palette. The class expects these four color aliases; the names
 % below describe what they actually are, unlike the upstream template which
 % defined a "VividPurple" that was set to pure black.
 \definecolor{Ink}{HTML}{000000}
@@ -79,10 +96,10 @@
   pdflang    = {en},
 }
 
-% url.sty defaults \url to \ttfamily, and nothing else in this CV is
-% monospaced: the one footnote URL was being set in Latin Modern Mono against
-% a Lato page. `same` keeps it in the surrounding typeface while url.sty
-% still handles the line breaking.
+% url.sty defaults \url to \ttfamily. The only monospace this CV wants is the
+% \texttt domain under the summary, set deliberately in Plex Mono above; a
+% URL caught by \url should stay in the surrounding typeface. `same' does
+% that while url.sty still handles the line breaking.
 \urlstyle{same}
 
 % Deliberately no page numbers, even at three pages. The class sets
