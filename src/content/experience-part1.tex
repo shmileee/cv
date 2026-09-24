@@ -7,31 +7,39 @@
 % running alongside Two Hundred, and the overlap is stated in the bullet
 % rather than left for the reader to spot in the dates.
 %
-% Bullets lead with the change, not the tool: a reader who has never heard of
-% Terramate should still understand what got better.
+% Bullets name the approach, not the product: "infrastructure as code" rather
+% than Terraform, "GitOps" rather than Argo CD. A reviewer who has never used
+% the tool still understands what changed. The tools themselves land in the
+% \textbf{Core} line closing each role, which keeps every keyword in the main
+% text column where a parser reads it, and anchored to the dates it was used
+% rather than floating in a margin list of unattributed claims.
+%
+% Bold marks a measured result, never a label. Reading the bold alone should
+% return evidence -- seven seconds to 59 milliseconds, months to weeks -- and
+% a bullet with nothing measured carries no bold rather than an invented
+% number.
 
 \cvevent{Senior Site Reliability Engineer}{Two Hundred, consulting for a global SaaS leader in construction IoT}{August 2022 -- Now}{Remote, Denmark}
 \begin{itemize}
-\item Own the platform a few hundred engineers ship through, in front of a product serving thousands of requests per second. Joined when infrastructure was still changed by hand
-\item \textbf{Made every change reviewable.} Moved all infrastructure onto pull requests that show what will happen -- the plan for cloud resources, the exact cluster diff for everything else -- and only then turned on automatic deployment. The review bot I wrote for that is still commenting on pull requests three and a half years later
-\item \textbf{Environments on demand.} Designed and built cell-based architecture: one command creates a self-contained environment -- network, cluster, identity, delivery -- and one command proves it is gone, refusing to forget it while anything still runs. A new region became a reviewed change instead of a multi-week project
-\item \textbf{Rebuilt the network nobody dared touch.} Moved live production routing onto explicit, reviewable resources without applying a single change, then onto a policy-defined network where environments are genuinely separated
-\item \textbf{Turned the shared Terraform estate into a product.} Golden paths teams could actually follow: released and changelogged modules, a layout scaling to hundreds of environments, an internal registry, and the source code, chat, on-call and service catalogue of a new team created from one reviewed file
-\item \textbf{Raised the security posture by making it automatic.} Container images, dependency updates, cluster upgrades and machine patching became continuous flows with a human at the merge gate rather than quarterly fire drills, so staying patched stopped depending on anyone remembering. Secrets moved out of configuration and into a vault, and the checks that once took seven seconds now run in milliseconds, before you commit rather than minutes later in CI
-\item \textbf{Put AI to work without new attack surface.} Built the gateway that lets AI assistants reach operational systems through the identity people already have -- read-only in production, no new credentials anywhere -- and encoded change review into supervised playbooks that merge only what they can prove is safe, clearing a months-old backlog roughly twenty times faster than by hand
-\item \textbf{Cut cost where it hides.} Moved the whole organisation off Docker Hub onto our own mirror -- no migration day, no manifests to edit, nobody noticed, and the bill went away. Saved thousands a month more on the network path nobody looks at, and made cheaper processors the default. Also absorbed an acquisition onto the platform in a summer, and shipped self-service functions running customer code in isolation
+\item Own the multi-account, multi-region AWS and Kubernetes platform a few hundred engineers ship through, behind a product serving thousands of requests per second. Joined when infrastructure was still changed by hand
+\item Moved infrastructure onto infrastructure as code and GitOps delivery: every change is a pull request showing the exact plan or cluster diff before approval, and the review automation behind it has run \textbf{three and a half years}. Cut the checks guarding every commit from \textbf{about seven seconds to 59 milliseconds} by rewriting the hot paths in Go and moving them from CI into the commit
+\item Built the gateway that lets AI assistants reach Argo CD, Grafana and Prometheus through the identity engineers already hold, \textbf{read-only in production and no new credentials}, and encoded change review into supervised playbooks that merge only what they prove safe
+\item Led the design and build of a cell-based architecture where one command creates a complete environment, network, cluster, identity and delivery alike, and a second destroys it, refusing to drop state until it verifies nothing still runs. Each cell is its own failure domain, so an incident cannot leave it, and a new region went from \textbf{a multi-week project to one reviewed change}
+\item Re-modeled live production networking \textbf{without changing a single running route}. Routes tracked by list position, where editing one address range could destroy and recreate a live one, moved onto explicit resources by proving an empty plan at each step, then onto a policy-defined backbone that keeps environments separated
+\item Turned the shared infrastructure code into an internal product with versioned modules, a private registry and golden paths, so teams provision their own environments instead of filing tickets. Creating a team, with repositories, chat, on-call and alerting, went from \textbf{a multi-day chore to one reviewed file}
+\item Replaced quarterly patching drills with continuous reviewed flows across container images, dependencies, cluster versions and machine images, rotating nodes in working hours rather than overnight. Brought clusters \textbf{years behind to current in six weeks} and cleared a security backlog built up over \textbf{months in a matter of weeks}
+\item Removed a company-wide vendor registry bill with an in-cloud mirror and admission-time image rewriting: no manifests edited, no migration day, and it has \textbf{held for eighteen months}. \textbf{Halved the per-gigabyte cost of the default egress path} with self-managed routing that fails back automatically, contributing the fixes upstream. Consolidated an acquisition onto the platform \textbf{in two months}, closing a second cloud account
 \par\smallskip
-\textbf{Core}: AWS, Kubernetes, Terraform \& Terramate, GitOps, Python \& Go
+\textbf{Core}: AWS (EKS, Lambda, Step Functions, Cloud WAN, ECR, IAM), Kubernetes, Argo CD, Flux, Karpenter, Kyverno, Terraform, Terramate, Atlantis, GitHub Actions, pre-commit, Renovate, Vault, Kafka, MCP, Python, Go
 \end{itemize}
 
 \divider
 
 \cvevent{Infrastructure Engineer}{Appsilon, consulting for Apple and Fortune 500 pharma}{June 2021 -- March 2024}{Remote, Poland}
 \begin{itemize}
-\item Ran the analytics platform behind one of Apple's finance departments for eighteen months -- availability, patching, upgrades and InfoSec compliance -- on a contract overlapping the role above
-\item Before that, designed highly available analytics platforms for Fortune 500 pharma clients on AWS and Azure, entirely as code, leaving a reusable base other teams used to stand up their own
-\item Migrated the company's own infrastructure to AWS -- accounts, access, networking, budgets and alerting -- with 95\% of it as code and every change through a reviewed pull request
-\item Supported data-science teams with delivery pipelines and containerization, and joined client architecture and sales calls
+\item Ran the analytics platform for one of Apple's finance departments for \textbf{eighteen months}: availability, patching, version upgrades and InfoSec compliance, on a contract overlapping the role above
+\item Designed highly available analytics platforms for Fortune 500 pharmaceutical clients on AWS and Azure, defined entirely as code, leaving a reusable base other teams used to stand up their own
+\item Migrated the company's own infrastructure to AWS, covering accounts, access, networking, budgets and alerting, with \textbf{95\% of it defined as code} and every change through a reviewed pull request
 \par\smallskip
 \textbf{Core}: AWS, Azure, Terraform, Ansible, Atlantis, Docker, Python
 \end{itemize}
