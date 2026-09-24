@@ -4,6 +4,20 @@
 % nothing they can check, so the block names the ground covered instead and
 % lets the roles beside it carry the proof.
 %
+% Grouped by problem domain, not by vendor. The \textbf{Core} line closing
+% each role already answers "which tool, at which job, when", so a second
+% tool-shaped list here would only repeat it. This answers the different
+% question a job description is written in: which domains does he own.
+%
+% Reliability and operations sits second on purpose. The title on this CV is
+% Site Reliability Engineer, and the column used to contain no on-call,
+% monitoring or upgrade vocabulary at all -- which reads as a platform
+% builder who has never carried a pager. The portfolio says otherwise, so
+% the taxonomy was the thing at fault.
+%
+% "Code" rather than "Languages": the second page already has a Languages
+% section, and that one means Ukrainian and Polish.
+%
 % Tags are dense here on purpose. The prose opposite stays concept-led and
 % mostly tool-free; this is the index a reader scans for the nouns, so it is
 % the one place where naming the technology is the point.
@@ -19,25 +33,36 @@
 \cvsection{Expertise}
 \smallskip
 
-\textbf{AWS}\par\smallskip
+\textbf{Cloud}\par\smallskip
+\cvtag{AWS}
+\cvtag{Azure}
 \cvtag{EKS}
 \cvtag{Lambda}
 \cvtag{Step Functions}
 \cvtag{Cloud WAN}
-\cvtag{ECR}
 \cvtag{IAM}
-\cvtag{SSM}
-\cvtag{DynamoDB}
 \par\medskip
 
-\textbf{Kubernetes and platform}\par\smallskip
-\cvtag{Flux}
+\textbf{Reliability and operations}\par\smallskip
+\cvtag{On-call}
+\cvtag{Incident response}
+\cvtag{Grafana}
+\cvtag{Prometheus}
+\cvtag{Cluster upgrades}
+\cvtag{Restore drills}
+\cvtag{Decision records}
+\par\medskip
+
+\textbf{Platform and delivery}\par\smallskip
+\cvtag{Kubernetes}
+\cvtag{GitOps}
 \cvtag{Argo CD}
-\cvtag{Crossplane}
+\cvtag{Flux}
 \cvtag{Karpenter}
-\cvtag{Kyverno}
 \cvtag{Helm}
-\cvtag{Strimzi}
+\cvtag{CI/CD}
+\cvtag{GitHub Actions}
+\cvtag{Golden paths}
 \par\medskip
 
 \textbf{Infrastructure as code}\par\smallskip
@@ -45,22 +70,14 @@
 \cvtag{Terramate}
 \cvtag{Atlantis}
 \cvtag{Ansible}
-\cvtag{Private registries}
-\par\medskip
-
-\textbf{Delivery and developer experience}\par\smallskip
-\cvtag{GitOps}
-\cvtag{CI/CD}
-\cvtag{GitHub Actions}
 \cvtag{Pre-commit}
-\cvtag{Renovate}
-\cvtag{Release automation}
-\cvtag{Golden paths}
 \par\medskip
 
-\textbf{Security}\par\smallskip
+\textbf{Security and supply chain}\par\smallskip
 \cvtag{Policy as code}
+\cvtag{Kyverno}
 \cvtag{Secrets management}
+\cvtag{Vault}
 \cvtag{OIDC federation}
 \cvtag{Supply chain}
 \cvtag{Patch automation}
@@ -68,12 +85,14 @@
 
 \textbf{Networking and cost}\par\smallskip
 \cvtag{VPC design}
+\cvtag{Transit Gateway}
 \cvtag{DNS}
-\cvtag{Cost optimisation}
+\cvtag{Cost optimization}
 \par\medskip
 
 \textbf{Data and streaming}\par\smallskip
 \cvtag{Kafka}
+\cvtag{Strimzi}
 \cvtag{Flink}
 \par\medskip
 
@@ -87,10 +106,3 @@
 \cvtag{Python}
 \cvtag{Go}
 \cvtag{Shell}
-\par\medskip
-
-\textbf{Working across teams}\par\smallskip
-\cvtag{Decision records}
-\cvtag{Standards}
-\cvtag{Knowledge sharing}
-\cvtag{Mentoring}
