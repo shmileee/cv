@@ -106,12 +106,10 @@ compile_document() {
     fail "tectonic reported success but $pdf_path does not exist."
   fi
 
-  # Lato reaches its hyphen glyph from three codepoints, so xdvipdfmx writes a
-  # ToUnicode entry for the last of them and every hyphen in the document
-  # extracts as U+2010 instead of the ASCII one a reader searches for. The
-  # script rewrites the CMap in place; its docstring carries the detail.
-  if ! python3 "$repository_root/scripts/ascii-hyphens.py" "$pdf_path"; then
-    fail 'could not rewrite the ToUnicode CMaps to ASCII hyphens.'
+  # Keep hyphens and word boundaries searchable and decorative FontAwesome
+  # glyphs out of extracted text. Rendering and object offsets are unchanged.
+  if ! python3 "$repository_root/scripts/normalize-pdf-text.py" "$pdf_path"; then
+    fail 'could not normalize the PDF text mappings.'
   fi
 
   phase "Wrote $output_directory/$document.pdf ($(wc -c < "$pdf_path" | tr -d ' ') bytes)"

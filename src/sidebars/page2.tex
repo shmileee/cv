@@ -8,11 +8,8 @@
 % already ran it at begin-document.
 \setlength{\RaggedRightRightskip}{0pt plus 1fil}\raggedright
 
-% No itemize in this file. \addnextpagesidebar defers the \marginpar to the
-% next page break, which lands in the middle of the bullet list running down
-% the text block, and a list opened inside that marginpar fails with
-% "perhaps a missing \item". Bold lead-ins read the same and buy back the
-% indent, which is worth having in a column this narrow.
+% Bold lead-ins keep this narrow column compact. The explicit page break
+% after Two Hundred lets \addnextpagesidebar run outside the experience lists.
 
 \cvsection{Education}
 \cvevent{MSc, Computer Science in Medicine}{Wrocław University of Science and
@@ -28,18 +25,17 @@ Ukrainian, Polish, English and Russian, all fluent.
 % to its own evidence makes the evidence look like it needed help.
 \cvsection{How I work}
 \smallskip
-\textbf{Decisions get written down.} I introduced decision records at two
-companies and wrote the standard for them.
+\textbf{Decisions get written down.} I introduced architectural decision
+records (ADRs) at two companies and wrote the standard for them.
 
 \smallskip
-\textbf{I teach what I build.} Mentoring, community channels, recorded
-walkthroughs and regular sessions on what I have found, lately on getting
-AI agents to do real work.
+\textbf{I teach what I build.} I mentor engineers through community channels,
+recorded walkthroughs and regular knowledge-sharing sessions, including
+supervised AI workflows.
 
 \smallskip
-\textbf{Mistakes are mine to correct.} When a change of mine turns out
-wrong, the revert comes from me the same week, with the root cause
-following.
+\textbf{I own changes through recovery.} When a change I make causes a
+problem, I handle the rollback and root-cause analysis.
 
 % The first three years live in the margin rather than the text block: they
 % are a timeline, not an argument.

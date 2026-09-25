@@ -1,66 +1,74 @@
 \cvevent{Senior Site Reliability Engineer}{Two Hundred, consulting for an
-industrial IoT company}{August 2022 -- Now}{Remote, Denmark}
+industrial IoT company}{August 2022 -- Present}{Remote, Denmark}
 \begin{itemize}
-\item Own the multi-account, multi-region AWS and Kubernetes platform a few
-hundred engineers ship through, behind a product serving thousands of requests
-per second. Joined when infrastructure was still changed by hand.
-\item Moved infrastructure onto infrastructure as code and GitOps delivery, so
-\casestudy{every change is a pull request}{making-infrastructure-changes-boring}
-shows its exact plan or cluster diff before approval. Cut \casestudy{the checks
-guarding every commit}{a-feedback-loop-measured-in-milliseconds} from
-\textbf{120s to 59ms} by rewriting the hot paths in Go.
-\item Built \casestudy{the gateway that lets AI
-assistants}{safe-ai-tooling-for-every-developer} reach Argo CD, Grafana and
-Prometheus through community MCP servers and the identity engineers already
-hold, and encoded change review into supervised AI playbooks.
-\item Co-led \casestudy{a cell-based
+\item Own the multi-account, multi-region AWS and Kubernetes platform used by
+hundreds of engineers to deploy production services handling thousands of
+requests per second.
+\item Co-led a \casestudy{cell-based
 architecture}{environments-you-can-create-and-destroy-with-one-command} where
-one command creates a whole environment -- network, cluster, identity,
-delivery -- and another destroys it, refusing to drop state while anything
-still runs. Each cell is its own failure domain, and a new region went from
-\textbf{a multi-week project to one reviewed pull request}.
-\item Moved production networking onto \casestudy{a policy-defined
-backbone}{rebuilding-the-network-as-one-policy} that keeps environments
-separated.
-\item Turned the shared infrastructure code into \casestudy{an internal
-product}{turning-a-terraform-repository-into-a-product} with versioned modules,
-a private registry and golden paths, so teams provision their own environments
-instead of filing tickets. \casestudy{Creating a
-team}{teams-that-create-themselves}, with repositories, chat, on-call and
-alerting, went from \textbf{a multi-day chore to one reviewed file}.
-\item Replaced patching drills with \casestudy{continuous reviewed
-flows}{dependency-updates-from-quarterly-panic-to-background-noise} across
-container images, dependencies, cluster versions and machine images,
-\casestudy{rotating nodes in working hours}{the-fleet-that-patches-itself}
-rather than overnight. Brought clusters \textbf{years behind to current in 6
-weeks} and cleared a months-old security backlog \textbf{in weeks}.
-\item Removed a company-wide vendor registry bill with \casestudy{an in-cloud
-mirror}{leaving-docker-hub-without-anyone-noticing} and admission-time image
-rewriting: no manifests edited, no migration day, \textbf{held for 18 months}.
-\textbf{Cut default egress cost per gigabyte by 50\%} with
+one command provisions a complete environment -- network, cluster, identity
+and delivery -- and another tears it down, preserving state until all resources
+are removed. Each cell is a separate failure domain; launching a region went
+from \textbf{a multi-week project to one reviewed pull request}.
+\item Productized shared infrastructure as an \casestudy{internal
+platform}{turning-a-terraform-repository-into-a-product} with versioned modules,
+a private registry and golden paths, replacing provisioning tickets. Reduced
+\casestudy{team onboarding}{teams-that-create-themselves} -- repositories,
+chat, on-call and alerting -- from \textbf{days of manual work to one reviewed
+configuration file}.
+\item Replaced manual changes with Terraform and
+\casestudy{GitOps delivery}{making-infrastructure-changes-boring}; every pull
+request includes the plan or Kubernetes diff for approval.
+Cut \casestudy{commit checks}{a-feedback-loop-measured-in-milliseconds} from
+\textbf{120s to 59ms} by rewriting hot paths in Go.
+\item Moved production networking to \casestudy{AWS Cloud
+WAN}{rebuilding-the-network-as-one-policy}, replacing approximately 15 module
+copies with one policy that separates environments.
+\item Automated \casestudy{patch
+management}{dependency-updates-from-quarterly-panic-to-background-noise} across
+container images, dependencies, Kubernetes versions and machine images through
+reviewed updates, with \casestudy{node
+rotation}{the-fleet-that-patches-itself} during working hours. Brought clusters
+\textbf{years behind to current in 6 weeks} and cleared a months-old security
+backlog \textbf{in weeks}.
+\item Eliminated the company-wide vendor registry bill with an
+\casestudy{image mirror}{leaving-docker-hub-without-anyone-noticing} and
+admission-time image rewriting, without initial manifest edits or a coordinated
+migration day. The rewrite policy remained a safety net \textbf{18 months later}.
+\item \textbf{Cut default egress cost per gigabyte by 50\%} with
 \casestudy{self-managed routing}{the-nat-bill-and-the-fix-that-went-upstream}
-that fails back automatically, and \casestudy{consolidated an
-acquisition}{absorbing-an-acquisition} onto the platform \textbf{in 2 months}.
+and automatic fallback.
+\item Led an \casestudy{acquisition migration}{absorbing-an-acquisition} onto
+the platform \textbf{in 2 months}, moving six services from Heroku to AWS and
+closing the legacy hosting account.
+\item Built an \casestudy{AI gateway}{safe-ai-tooling-for-every-developer} to
+Argo CD, Grafana and Prometheus via community Model Context Protocol (MCP)
+servers and existing identities; encoded change review in supervised AI
+playbooks.
 \par\smallskip
 \textbf{Core}: AWS (EKS, Lambda, DynamoDB, ECR), Kubernetes, Argo CD,
 Terraform, Terramate, Renovate, Kafka, Flink, MCP, Go
 \end{itemize}
 
+% Keep Two Hundred together on page one. Ending the page outside an itemize
+% also lets the deferred sidebar render without consuming a pending item label.
+\newpage
+
 \divider
 
 \cvevent{Infrastructure Engineer}{Appsilon, consulting for Apple and Fortune 500
-pharma \textnormal{(part-time from 2022)}}{June 2021 -- March 2024}{Remote,
-Poland}
+pharma \textnormal{(full-time to Aug 2022; then part-time)}}{June 2021 -- March
+2024}{Remote, Poland}
 \begin{itemize}
-\item Ran the analytics platform for one of Apple's finance departments for
+\item Operated the analytics platform for one of Apple's finance departments for
 \textbf{18 months}: availability, patching, version upgrades and InfoSec
 compliance.
-\item Designed highly available analytics platforms for Fortune 500
-pharmaceutical clients on AWS and Azure, defined entirely as code, leaving a
-reusable base other teams used to stand up their own.
-\item Migrated the company's own infrastructure to AWS, covering accounts,
-access, networking, budgets and alerting, with \textbf{100\% of it defined as
-code} and every change through a reviewed pull request.
+\item Designed highly available RStudio and R/Shiny platforms on AWS and
+Azure using reusable Terraform and Ansible codebases adopted by other teams.
+\item Migrated internal infrastructure to AWS with \textbf{95\% managed through
+IaC}, implementing multi-account governance, cross-account IAM, networking and
+budget alerts. Introduced Atlantis for peer-reviewed infrastructure changes.
 \par\smallskip
-\textbf{Core}: AWS, Azure, Terraform, Ansible, Atlantis, Docker, Python
+\textbf{Core}: AWS (Organizations, CloudTrail, Config, SSM, SSO), Azure,
+Terraform, Ansible, Atlantis, Docker, Python
 \end{itemize}

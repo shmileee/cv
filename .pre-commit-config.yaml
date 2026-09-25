@@ -51,6 +51,14 @@ repos:
 
   - repo: local
     hooks:
+      - id: pdf-tools
+        name: test PDF text normalization and tag packing
+        entry: python3 -B -m unittest discover -s tests
+        language: system
+        pass_filenames: false
+        files: ^(scripts|tests)/.*\.py$
+        always_run: true
+        priority: readonly
       - id: gitleaks
         name: scan secrets with gitleaks
         entry: gitleaks dir --redact --no-banner .

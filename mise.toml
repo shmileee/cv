@@ -30,6 +30,10 @@ run = "./scripts/build.sh"
 description = "Assemble the publishable site in build/site"
 run = "./scripts/build.sh --site"
 
+[tasks.pack-tags]
+description = "Measure and bin-pack the expertise tags"
+run = "python3 scripts/pack-tags.py"
+
 # Previews the assembled directory rather than the PDF alone, so the redirect
 # is exercised exactly as GitHub Pages will serve it.
 [tasks.serve]

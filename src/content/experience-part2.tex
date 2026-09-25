@@ -1,22 +1,22 @@
-% The dividing line is 2020: roles from the last five years get bullets here,
-% everything before gets a sentence in the "Earlier" block of
-% sidebars/page2.
-%
-% Same contract as experience-part1: the bullet names the approach, the
-% \textbf{Core} line closing the role carries the products.
+% Earlier senior roles continue on page two; pre-2019 roles are summarized in
+% the sidebar. Bullets explain the work, and Core lists the principal tools.
 
 \cvevent{Senior DevOps Engineer}{S3 Connected Health}{August 2020 -- May
 2021}{Wrocław, Poland}
 \begin{itemize}
-\item Built the delivery path for regulated medical software: the firmware
-pipeline behind an electroporation platform for treating gastrointestinal
-cancers, and a pediatric vision therapy service shipping into Philips
-HealthSuite.
-\item Put the TypeScript service estate (50+ microservices) on staged
-rollouts, and wrote a project template so a new service arrived with delivery
-already working.
+\item Built CI/CD and cross-compilation pipelines for C/C++ medical-device
+firmware, with custom pre-commit checks to standardize code quality.
+\item Delivered multi-step pipelines across \textbf{50+ TypeScript repositories},
+enabling \textbf{canary deployments} to Philips HealthSuite with Qualys and
+Checkmarx security scanning.
+\item Created a reusable project template with Drone CI, Argo CD and Helm,
+adopted across multiple teams.
+\item Published and maintained a
+\href{https://pypi.org/project/bitbucket-python-client/}{\uline{Python client}}
+for the Bitbucket API on PyPI.
 \par\smallskip
-\textbf{Core}: Kubernetes, Terraform, Ansible, Argo CD, Drone, Python
+\textbf{Core}: AWS EKS, CloudFormation, Ansible, Argo CD, Drone CI, Helm,
+Python, Bash
 \end{itemize}
 
 \divider
@@ -24,12 +24,14 @@ already working.
 \cvevent{Senior DevOps Engineer}{Capgemini}{May 2019 -- July 2020}{Wrocław,
 Poland}
 \begin{itemize}
-\item Automated multi-tenant Kafka and Flink infrastructure for trading and risk
-systems, defined as code, and containerized the Java services running on it.
-\item Built the pipeline that unseals the production HashiCorp Vault
-clusters, and put single sign-on with smart-card certificates in front of
-internal tooling.
+\item Automated multi-tenant Kafka and Flink infrastructure with Terraform and
+Ansible for trading and risk systems; containerized Java services and built
+custom Elastic Beats for monitoring.
+\item Built Jenkins automation for production HashiCorp Vault unsealing and
+contributed to shared CI/CD libraries. Secured internal tools with
+oauth2-proxy and smart-card single sign-on (SSO).
+\item Automated AWX deployments on OpenShift and backups to MinIO.
 \par\smallskip
-\textbf{Core}: Kubernetes, OpenShift, Kafka, Flink, HashiCorp Vault,
-HashiCorp Consul, Terraform
+\textbf{Core}: Terraform, Ansible, OpenShift, Kafka, Flink, HashiCorp Vault,
+Jenkins, Elastic Beats, AWX, MinIO
 \end{itemize}

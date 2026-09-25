@@ -1,128 +1,118 @@
-% Infinite ragged-right slack, as in sidebars/page2: the preamble's finite cap
-% cannot absorb a row of tag boxes that happens to fall short, and the class
-% already issued \raggedright before this file was read, so re-issue it.
+% Prioritize the systems, automation and production-operation skills shared by
+% Amazon Systems Development and Apple SRE roles. The visible tags describe
+% actual experience, not every requirement in those job descriptions.
+% Repack with `mise run pack-tags` after editing: widths come from this CV's
+% font and tag macro, rows are solved exactly, and slack is placed at the end.
 \setlength{\RaggedRightRightskip}{0pt plus 1fil}\raggedright
+% Align Expertise with Experience; 7pt group gaps keep the full-height column
+% readable without reducing the font size or stretching spaces between tags.
+\vspace*{-0.5\baselineskip}
 
-% Five rules decide what is in this column, where it sits, and in what order.
-%
-% 1. The vendor goes in the group header, never in a tag. "Cloud and
-%    networking (AWS)" is why EKS and Lambda do not each carry an AWS, and
-%    why "Transit Gateway" is not "AWS Transit Gateway" spending most of a
-%    row on a word the header has already said.
-%
-% 2. A tag has to be defensible under questioning, which is not the same as
-%    being narrated in a bullet: this column is the keyword surface a search
-%    hits, the bullets are the evidence surface, and the two answer different
-%    tests. Searching the roles, the case studies and the posts is how that
-%    gets checked, but it only ever proves the positive: the written record
-%    is where the work happened to be written up, not the boundary of the
-%    work. CloudWatch, OpenTelemetry, IPAM, RDS, ElastiCache and Terragrunt
-%    each return nothing from that search and stay regardless -- they are
-%    hands-on tools that predate the site or never got a write-up, and the
-%    question they invite has an answer. Absence from the writing is a
-%    prompt to ask, not a verdict.
-%
-% 3. Tools small enough to learn in an afternoon stay out, however heavily
-%    they were used. Nobody screens on them, so they cost a row and return
-%    nothing.
-%
-% 4. Grouping follows what a tool is, not the one job it was put to here.
-%    Kyverno is a Kubernetes admission engine that happens to serve an image
-%    rewrite, so it sits with Kubernetes rather than under Security.
-%
-% 5. Order inside a group is a bin pack, not a logical sequence. Tag boxes
-%    wrap greedily in a 192.76pt column with a 5.50pt gap, so source order
-%    alone decides how full each row is. Each group is solved for the minimum
-%    number of rows with item size w+5.50 and capacity 198.26pt, and the rows
-%    are then emitted fullest first, so the slack collects in the group's
-%    last row where a ragged edge reads as deliberate. Plain
-%    first-fit-decreasing is not enough: it costs a row on Kubernetes and
-%    delivery, which packs into three rows and not the four FFD finds.
-%
-% Widths come from the render, never from character counts, which means
-% renaming one tag can silently cost a row: re-solve after any rename, and
-% check that the next row's first tag still does not fit in the leftover of
-% the row above it, or greedy wrapping will pull it up and undo the solve.
-% Both lengths are derived -- 192.76pt is marginparwidth = 6.8cm set in
-% preamble.tex, and the 806.6pt floor the column must not cross is A4 less
-% the 1.25cm bottom margin -- so both move if that geometry does.
 \cvsection{Expertise}
 \smallskip
 
-\textbf{Cloud and networking (AWS)}\par\smallskip
-\cvtag{Transit Gateway}
-\cvtag{Step Functions}
-\cvtag{S3}
-\cvtag{CloudWatch}
-\cvtag{Cloud WAN}
-\cvtag{Route 53}
-\cvtag{DynamoDB}
-\cvtag{ElastiCache}
-\cvtag{CodeBuild}
-\cvtag{VPC design}
-\cvtag{Lambda}
-\cvtag{IPAM}
-\cvtag{RDS}
-\cvtag{IAM}
-\cvtag{ECR}
-\cvtag{EKS}
-\par\medskip
-
-\textbf{Kubernetes and delivery}\par\smallskip
-\cvtag{GitHub Actions}
-\cvtag{Kubernetes}
-\cvtag{Docker}
-\cvtag{Argo CD}
-\cvtag{Kyverno}
-\cvtag{GitOps}
-\cvtag{CI/CD}
-\cvtag{Kustomize}
-\cvtag{Karpenter}
-\cvtag{Helm}
-\cvtag{Flux}
-\par\medskip
-
-\textbf{Infrastructure as code}\par\smallskip
-\cvtag{Policy as code}
-\cvtag{Crossplane}
-\cvtag{Atlantis}
-\cvtag{Terragrunt}
-\cvtag{Terramate}
-\cvtag{Terraform}
-\cvtag{Renovate}
-\cvtag{Ansible}
-\par\medskip
-
-\textbf{Reliability and operations}\par\smallskip
-\cvtag{OpenTelemetry}
-\cvtag{Observability}
-\cvtag{Linux}
-\cvtag{Multi-region architecture}
-\cvtag{Prometheus}
+% Evidence: production ownership and root-cause analysis in the CV; fleet
+% rotation, cell architecture and AI gateway case studies. CloudWatch and
+% OpenTelemetry also appeared in the original CV as confirmed hands-on work.
+\textbf{Reliability and observability}\par\smallskip
 \cvtag{Incident response}
-\cvtag{Cost optimization}
-\cvtag{Grafana}
+\cvtag{Root-cause analysis}
+\cvtag{Linux}
+\cvtag{High availability}
+\cvtag{CloudWatch}
+\cvtag{OpenTelemetry}
+\cvtag{Distributed systems}
 \cvtag{On-call}
-\par\medskip
+\cvtag{Grafana}
+\cvtag{Prometheus}
+\par\vspace{7pt}
 
-\textbf{Security and supply chain}\par\smallskip
-\cvtag{Secrets management}
-\cvtag{OIDC federation}
-\cvtag{Admission control}
-\cvtag{Patch automation}
-\cvtag{Supply chain}
-\cvtag{Vault}
-\par\medskip
-
-\textbf{Data and streaming}\par\smallskip
-\cvtag{Strimzi}
-\cvtag{Kafka}
-\par\medskip
-
-\textbf{Code and AI}\par\smallskip
-\cvtag{AWS AgentCore}
-\cvtag{MCP gateways}
-\cvtag{Go}
+% Evidence: Go commit checks, Python Kafka migration, shell automation and
+% Terraform modules. Go (Golang) includes the spelling used in Amazon roles.
+\textbf{Programming}\par\smallskip
 \cvtag{Python}
+\cvtag{Go (Golang)}
 \cvtag{Bash}
 \cvtag{HCL}
+\par\vspace{7pt}
+
+% Evidence: AWS/Azure analytics platforms; network, NAT, acquisition, cell
+% and self-service cloud function case studies. RDS, ElastiCache and Route 53
+% were also part of the original hands-on inventory.
+\textbf{Cloud and networking}\par\smallskip
+\cvtag{AWS}
+\cvtag{Route 53}
+\cvtag{RDS}
+\cvtag{ElastiCache}
+\cvtag{EKS}
+\cvtag{Cost optimization}
+\cvtag{Cloud WAN}
+\cvtag{VPC design}
+\cvtag{Azure}
+\cvtag{Transit Gateway}
+\cvtag{ECR}
+\cvtag{S3}
+\cvtag{Step Functions}
+\cvtag{Lambda}
+\cvtag{EC2}
+\cvtag{DynamoDB}
+\cvtag{Multi-region}
+\par\vspace{7pt}
+
+% Evidence: cell bootstrap, fleet rotation, reviewed delivery and image-factory
+% case studies; Jenkins at Capgemini. Kustomize also appeared in the original
+% hands-on inventory.
+\textbf{Kubernetes and delivery}\par\smallskip
+\cvtag{Kyverno}
+\cvtag{Flux}
+\cvtag{Kustomize}
+\cvtag{GitOps}
+\cvtag{Docker}
+\cvtag{Jenkins}
+\cvtag{Karpenter}
+\cvtag{Helm}
+\cvtag{Renovate}
+\cvtag{GitHub Actions}
+\cvtag{Argo CD}
+\cvtag{Kubernetes}
+\cvtag{CI/CD}
+\par\vspace{7pt}
+
+% Evidence: platform modules, reviewed changes and cloud function case studies;
+% Appsilon Core tools; CloudFormation EKS deployments at S3 Connected Health.
+\textbf{Infrastructure as code}\par\smallskip
+\cvtag{CloudFormation}
+\cvtag{Terraform}
+\cvtag{Ansible}
+\cvtag{Terramate}
+\cvtag{Crossplane}
+\cvtag{Atlantis}
+\par\vspace{7pt}
+
+% Evidence: Vault/SSO at Capgemini, Kafka admission policies, image provenance,
+% dependency automation and identity controls in the MCP gateway.
+\textbf{Security}\par\smallskip
+\cvtag{HashiCorp Vault}
+\cvtag{Secrets management}
+\cvtag{Patch automation}
+\cvtag{Admission control}
+\cvtag{Supply chain security}
+\cvtag{OAuth}
+\cvtag{IAM}
+\cvtag{OIDC federation}
+\cvtag{Policy as code}
+\par\vspace{7pt}
+
+% Evidence: Kafka/Flink at Two Hundred and Capgemini; Strimzi topic adoption.
+\textbf{Data and streaming}\par\smallskip
+\cvtag{Apache Kafka}
+\cvtag{Apache Flink}
+\cvtag{Strimzi}
+\par\vspace{7pt}
+
+% Evidence: safe-ai-tooling-for-every-developer (AgentCore gateway and supervised
+% agent playbooks). Keep this distinct from programming and core SRE skills.
+\textbf{AI infrastructure}\par\smallskip
+\cvtag{Amazon Bedrock AgentCore}
+\cvtag{MCP}
+\cvtag{Supervised agents}
