@@ -1,108 +1,128 @@
-% Margin column beside the first page.
-%
-% This began as \cvskill bars. Self-assigned five-out-of-fives tell a reader
-% nothing they can check, so the block names the ground covered instead and
-% lets the roles beside it carry the proof.
-%
-% Grouped by problem domain, not by vendor. The \textbf{Core} line closing
-% each role already answers "which tool, at which job, when", so a second
-% tool-shaped list here would only repeat it. This answers the different
-% question a job description is written in: which domains does he own.
-%
-% Reliability and operations sits second on purpose. The title on this CV is
-% Site Reliability Engineer, and the column used to contain no on-call,
-% monitoring or upgrade vocabulary at all -- which reads as a platform
-% builder who has never carried a pager. The portfolio says otherwise, so
-% the taxonomy was the thing at fault.
-%
-% "Code" rather than "Languages": the second page already has a Languages
-% section, and that one means Ukrainian and Polish.
-%
-% Tags are dense here on purpose. The prose opposite stays concept-led and
-% mostly tool-free; this is the index a reader scans for the nouns, so it is
-% the one place where naming the technology is the point.
-%
-% Education and languages moved to the second page: this column needs the
-% whole page now.
-%
-% Infinite ragged-right slack, as in sidebars/page2: the preamble's 3em cap
+% Infinite ragged-right slack, as in sidebars/page2: the preamble's finite cap
 % cannot absorb a row of tag boxes that happens to fall short, and the class
 % already issued \raggedright before this file was read, so re-issue it.
 \setlength{\RaggedRightRightskip}{0pt plus 1fil}\raggedright
 
+% Five rules decide what is in this column, where it sits, and in what order.
+%
+% 1. The vendor goes in the group header, never in a tag. "Cloud and
+%    networking (AWS)" is why EKS and Lambda do not each carry an AWS, and
+%    why "Transit Gateway" is not "AWS Transit Gateway" spending most of a
+%    row on a word the header has already said.
+%
+% 2. A tag has to be defensible under questioning, which is not the same as
+%    being narrated in a bullet: this column is the keyword surface a search
+%    hits, the bullets are the evidence surface, and the two answer different
+%    tests. Searching the roles, the case studies and the posts is how that
+%    gets checked, but it only ever proves the positive: the written record
+%    is where the work happened to be written up, not the boundary of the
+%    work. CloudWatch, OpenTelemetry, IPAM, RDS, ElastiCache and Terragrunt
+%    each return nothing from that search and stay regardless -- they are
+%    hands-on tools that predate the site or never got a write-up, and the
+%    question they invite has an answer. Absence from the writing is a
+%    prompt to ask, not a verdict.
+%
+% 3. Tools small enough to learn in an afternoon stay out, however heavily
+%    they were used. Nobody screens on them, so they cost a row and return
+%    nothing.
+%
+% 4. Grouping follows what a tool is, not the one job it was put to here.
+%    Kyverno is a Kubernetes admission engine that happens to serve an image
+%    rewrite, so it sits with Kubernetes rather than under Security.
+%
+% 5. Order inside a group is a bin pack, not a logical sequence. Tag boxes
+%    wrap greedily in a 192.76pt column with a 5.50pt gap, so source order
+%    alone decides how full each row is. Each group is solved for the minimum
+%    number of rows with item size w+5.50 and capacity 198.26pt, and the rows
+%    are then emitted fullest first, so the slack collects in the group's
+%    last row where a ragged edge reads as deliberate. Plain
+%    first-fit-decreasing is not enough: it costs a row on Kubernetes and
+%    delivery, which packs into three rows and not the four FFD finds.
+%
+% Widths come from the render, never from character counts, which means
+% renaming one tag can silently cost a row: re-solve after any rename, and
+% check that the next row's first tag still does not fit in the leftover of
+% the row above it, or greedy wrapping will pull it up and undo the solve.
+% Both lengths are derived -- 192.76pt is marginparwidth = 6.8cm set in
+% preamble.tex, and the 806.6pt floor the column must not cross is A4 less
+% the 1.25cm bottom margin -- so both move if that geometry does.
 \cvsection{Expertise}
 \smallskip
 
-\textbf{Cloud}\par\smallskip
-\cvtag{AWS}
-\cvtag{Azure}
-\cvtag{EKS}
-\cvtag{Lambda}
+\textbf{Cloud and networking (AWS)}\par\smallskip
+\cvtag{Transit Gateway}
 \cvtag{Step Functions}
+\cvtag{S3}
+\cvtag{CloudWatch}
 \cvtag{Cloud WAN}
+\cvtag{Route 53}
+\cvtag{DynamoDB}
+\cvtag{ElastiCache}
+\cvtag{CodeBuild}
+\cvtag{VPC design}
+\cvtag{Lambda}
+\cvtag{IPAM}
+\cvtag{RDS}
 \cvtag{IAM}
+\cvtag{ECR}
+\cvtag{EKS}
 \par\medskip
 
-\textbf{Reliability and operations}\par\smallskip
-\cvtag{On-call}
-\cvtag{Incident response}
-\cvtag{Grafana}
-\cvtag{Prometheus}
-\cvtag{Cluster upgrades}
-\cvtag{Restore drills}
-\cvtag{Decision records}
-\par\medskip
-
-\textbf{Platform and delivery}\par\smallskip
+\textbf{Kubernetes and delivery}\par\smallskip
+\cvtag{GitHub Actions}
 \cvtag{Kubernetes}
-\cvtag{GitOps}
+\cvtag{Docker}
 \cvtag{Argo CD}
-\cvtag{Flux}
+\cvtag{Kyverno}
+\cvtag{GitOps}
+\cvtag{CI/CD}
+\cvtag{Kustomize}
 \cvtag{Karpenter}
 \cvtag{Helm}
-\cvtag{CI/CD}
-\cvtag{GitHub Actions}
-\cvtag{Golden paths}
+\cvtag{Flux}
 \par\medskip
 
 \textbf{Infrastructure as code}\par\smallskip
-\cvtag{Terraform}
-\cvtag{Terramate}
+\cvtag{Policy as code}
+\cvtag{Crossplane}
 \cvtag{Atlantis}
+\cvtag{Terragrunt}
+\cvtag{Terramate}
+\cvtag{Terraform}
+\cvtag{Renovate}
 \cvtag{Ansible}
-\cvtag{Pre-commit}
+\par\medskip
+
+\textbf{Reliability and operations}\par\smallskip
+\cvtag{OpenTelemetry}
+\cvtag{Observability}
+\cvtag{Linux}
+\cvtag{Multi-region architecture}
+\cvtag{Prometheus}
+\cvtag{Incident response}
+\cvtag{Cost optimization}
+\cvtag{Grafana}
+\cvtag{On-call}
 \par\medskip
 
 \textbf{Security and supply chain}\par\smallskip
-\cvtag{Policy as code}
-\cvtag{Kyverno}
 \cvtag{Secrets management}
-\cvtag{Vault}
 \cvtag{OIDC federation}
-\cvtag{Supply chain}
+\cvtag{Admission control}
 \cvtag{Patch automation}
-\par\medskip
-
-\textbf{Networking and cost}\par\smallskip
-\cvtag{VPC design}
-\cvtag{Transit Gateway}
-\cvtag{DNS}
-\cvtag{Cost optimization}
+\cvtag{Supply chain}
+\cvtag{Vault}
 \par\medskip
 
 \textbf{Data and streaming}\par\smallskip
-\cvtag{Kafka}
 \cvtag{Strimzi}
-\cvtag{Flink}
+\cvtag{Kafka}
 \par\medskip
 
-\textbf{AI in production}\par\smallskip
+\textbf{Code and AI}\par\smallskip
+\cvtag{AWS AgentCore}
 \cvtag{MCP gateways}
-\cvtag{Supervised agents}
-\cvtag{Agent skills}
-\par\medskip
-
-\textbf{Code}\par\smallskip
-\cvtag{Python}
 \cvtag{Go}
-\cvtag{Shell}
+\cvtag{Python}
+\cvtag{Bash}
+\cvtag{HCL}

@@ -1,10 +1,11 @@
 % Margin column for the second page, placed by \addnextpagesidebar.
 %
-% Infinite ragged-right slack: the preamble caps \RaggedRightRightskip at 3em
-% to keep the wide lines in the text block from overrunning it, which is far
-% too tight for prose in a 6.8cm margin. \raggedright is re-issued because
-% ragged2e's `newcommands` option aliases it to \RaggedRight, which reads the
-% length when it runs -- and the class already ran it at begin-document.
+% Infinite ragged-right slack: the preamble's finite cap on
+% \RaggedRightRightskip keeps the wide lines in the text block from
+% overrunning it, and is far too tight for prose in a 6.8cm margin.
+% \raggedright is re-issued because ragged2e's `newcommands` option aliases
+% it to \RaggedRight, which reads the length when it runs -- and the class
+% already ran it at begin-document.
 \setlength{\RaggedRightRightskip}{0pt plus 1fil}\raggedright
 
 % No itemize in this file. \addnextpagesidebar defers the \marginpar to the
@@ -14,18 +15,17 @@
 % indent, which is worth having in a column this narrow.
 
 \cvsection{Education}
-\cvevent{MSc, Computer Science in Medicine}{Wrocław University of Science and Technology}{2017 -- 2019}{}
-\cvevent{BSc, Computer Science}{Wrocław University of Science and Technology}{2013 -- 2016}{}
+\cvevent{MSc, Computer Science in Medicine}{Wrocław University of Science and
+Technology}{2017 -- 2019}{}
+\cvevent{BSc, Computer Science}{Wrocław University of Science and
+Technology}{2013 -- 2016}{}
 
 \cvsection{Languages}
 \smallskip
 Ukrainian, Polish, English and Russian, all fluent.
 
-% Three entries, not six. The other three -- measuring before rewriting,
-% building once for everyone, running migrations as campaigns -- are already
-% demonstrated by the bullets opposite, and a trait asserted next to its own
-% evidence makes the evidence look like it needed help. What survives is
-% conduct the bullets cannot show.
+% What belongs here is conduct the bullets cannot show. A trait asserted next
+% to its own evidence makes the evidence look like it needed help.
 \cvsection{How I work}
 \smallskip
 \textbf{Decisions get written down.} I introduced decision records at two
@@ -41,9 +41,8 @@ AI agents to do real work.
 wrong, the revert comes from me the same week, with the root cause
 following.
 
-% The first three years live in the margin rather than the text block. They
-% are a timeline, not an argument, and they were spending four lines of a
-% two-page document saying so.
+% The first three years live in the margin rather than the text block: they
+% are a timeline, not an argument.
 \cvsection{Earlier}
 \smallskip
 \textbf{Margo Consulting} -- DevOps Engineer, 2018--2019. Automated

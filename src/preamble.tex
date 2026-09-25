@@ -1,7 +1,8 @@
 % Engine setup, palette and link handling.
 %
-% altacv.cls is vendored verbatim from upstream v1.1.5, so every deviation
-% from stock AltaCV lives in this file rather than in the class.
+% altacv.cls is vendored from upstream v1.1.5 and carries exactly one local
+% change, marked in the class itself. Every other deviation from stock AltaCV
+% belongs in this file.
 
 \usepackage[english]{babel}
 
@@ -17,12 +18,68 @@
   bottom         = 1.25cm,
 }
 
-% Tectonic drives XeTeX, and fontspec resolves names against *installed system
-% fonts*. Lato is not installed on a CI runner, so it is loaded by file name
-% instead: those .ttf files ship inside the TeX Live bundle that tectonic
-% downloads, which is what makes a laptop build and a runner build identical.
-% Lato is also what upstream's pdfLaTeX branch selects, so the typeface is
-% unchanged from the original template.
+% Replay each \marginpar after the text column rather than at the point it was
+% issued. A resume parser reads a page in the order the PDF's text stream was
+% written, and both sidebars here are anchored above the roles they sit beside:
+% left alone, the extracted page two runs education, languages, how I work and
+% the pre-2020 jobs *between* the last bullet of the current role and the Core
+% line that closes it. A parser segmenting by proximity then files eighteen
+% months of registry savings under Tieto, 2016.
+%
+% Deferring is safe because \@addmarginpar contributes nothing to the page's
+% vertical list -- its leading \kern and closing strut cancel out -- so nothing
+% depends on where in that list it sits. The replay only needs the anchor's
+% distance down the page: \@pageht plus the depth the \kern backs over.
+%
+% Three things below are load-bearing:
+%
+% - The kern and strut stay behind. The strut is what leaves \prevdepth at
+%   \@pagedp; drop it and the first line after the anchor loses its interline
+%   glue, pulling the whole page up by a baseline.
+%
+% - The \topskip term. \addnextpagesidebar's box is the first on its page, so
+%   TeX inserts top-of-page glue ahead of it and the anchor sits \topskip below
+%   where \@pageht claims. Inside a \vbox of our own that glue does not exist,
+%   and without the term the second sidebar replays 10pt too high.
+%
+% - The patch target. \@makecol is the last point at which the finished column
+%   is still a box we can append to, and the append restores the box's own
+%   height and depth because \@outputpage positions the page by them.
+\makeatletter
+\newbox\cv@deferredsidebar
+\let\cv@addmarginpar\@addmarginpar
+\def\@addmarginpar{%
+  \dimen@\dimexpr\@pageht+\@pagedp\relax
+  \ifdim\@pageht=\z@\advance\dimen@\topskip\fi
+  \global\setbox\cv@deferredsidebar\vbox{%
+    \offinterlineskip
+    \ifvoid\cv@deferredsidebar\else\unvbox\cv@deferredsidebar\fi
+    \vbox to\z@{\vskip\dimen@\cv@addmarginpar\vss}}%
+  \kern-\@pagedp
+  \nointerlineskip
+  \hbox{\vrule\@height\z@\@width\z@\@depth\@pagedp}%
+}
+\apptocmd{\@makecol}{%
+  \ifvoid\cv@deferredsidebar\else
+    \dimen@\ht\@outputbox
+    \dimen@ii\dp\@outputbox
+    \setbox\@outputbox\vbox{%
+      \box\@outputbox
+      \nointerlineskip
+      \vbox to\z@{\vskip-\dimexpr\dimen@+\dimen@ii\relax
+                  \box\cv@deferredsidebar\vss}}%
+    \ht\@outputbox\dimen@
+    \dp\@outputbox\dimen@ii
+    \global\setbox\cv@deferredsidebar\box\voidb@x
+  \fi}{}{\errmessage{Could not patch \string\@makecol; the sidebar would
+  silently go back to being read before the roles it sits beside}}
+\makeatother
+
+% Tectonic drives XeTeX, and fontspec resolves family names against *installed
+% system fonts*. Lato is not installed on a CI runner, so it is loaded by file
+% name instead: those .ttf files ship inside the pinned TeX Live bundle that
+% tectonic downloads, which is what makes a laptop build and a runner build
+% identical.
 \ifxetexorluatex
   \setmainfont{Lato}[
     Extension      = .ttf,
@@ -30,14 +87,22 @@
     BoldFont       = *-Bold,
     ItalicFont     = *-Italic,
     BoldItalicFont = *-BoldItalic,
+    % Kerning off, because in this pipeline the kern pairs are what a text
+    % extractor reads as word boundaries. xdvipdfmx never writes a space
+    % character: it sets inter-word space as a TJ displacement, so anything
+    % reading the PDF has to infer where words end from how large each
+    % displacement is. Lato kerns T against a following vowel by 0.121em,
+    % which clears that threshold, and the affected words extract as
+    % "T erraform", "T en years", "T ransit Gateway" -- none of which survive
+    % a keyword search. The kerns are worth about a point of tightness on
+    % those pairs; the words are worth more.
+    Kerning        = Off,
   ]
 
   % IBM Plex Mono, for the single inline-code span in the document: the site
   % domain under the summary. Loaded by file name for the same reason as Lato
-  % above, out of the pinned bundle, so a laptop and a CI runner resolve the
-  % identical font. Plex Mono is also what oponomarov.com sets its own code
-  % column in, which is the point -- the CV and the site it points at should
-  % render that domain the same way.
+  % above. Plex Mono is what oponomarov.com sets its own code column in, so
+  % the CV and the site it points at render that domain the same way.
   %
   % Scale=MatchLowercase is load-bearing. Plex Mono's lowercase runs larger
   % than Lato's at the same nominal size, and without the match the domain
@@ -54,10 +119,22 @@
   \usepackage[default]{lato}
 \fi
 
-% ragged2e caps the right-hand slack at 2em, which is too tight for the dense
-% technology lists: two of them overran the text block by 5pt and 10pt rather
-% than wrapping one word earlier. More slack removes both overfull boxes.
-\setlength{\RaggedRightRightskip}{0pt plus 3em}
+% ragged2e defaults the right-hand slack to 2em, which is too tight for the
+% dense technology lines. With hyphenation disabled just below, a line has to
+% fit a whole word or give it up, and "Terraform" at the end of a Core line
+% needs room for the whole word: under 6em of slack those lines run past the
+% text block instead of wrapping one word earlier.
+\setlength{\RaggedRightRightskip}{0pt plus 6em}
+
+% No hyphenation either, and for the extraction reason again: a hyphenated
+% line break splits a word across two lines of the text stream, and neither
+% half is the word -- "cre-dentials", "container-ized", "secu-rity".
+% \exhyphenpenalty covers the same break taken at a hyphen the word already
+% has, which is what would split "multi-account" or "read-only" in two.
+% The right edge is ragged and slack already, so there is nothing for the
+% hyphens to buy back.
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
 
 % The class sets itemsep=0.25\baselineskip. Across the ~30 bullets in this
 % document that padding alone costs most of a page, and the bullets are
@@ -65,9 +142,7 @@
 % is what keeps the CV to two pages without deleting anything a reader wants.
 \setlist{itemsep=0.12\baselineskip}
 
-% Monochrome palette. The class expects these four color aliases; the names
-% below describe what they actually are, unlike the upstream template which
-% defined a "VividPurple" that was set to pure black.
+% Monochrome palette. The class expects these four color aliases.
 \definecolor{Ink}{HTML}{000000}
 \definecolor{Graphite}{HTML}{2E2E2E}
 \colorlet{heading}{Ink}
@@ -78,12 +153,10 @@
 \renewcommand{\itemmarker}{{\small\textbullet}}
 \renewcommand{\ratingmarker}{\faCircle}
 
-% The email glyph is an envelope rather than the stock \faAt. FontAwesome 4
-% names the "at" glyph `_475`, which xdvipdfmx cannot parse into a ToUnicode
-% entry, and it was the single source of the build's only warning -- every
-% other icon in this CV is clean. An envelope also matches the weight of the
-% phone, marker, LinkedIn and GitHub glyphs beside it; \faAt sat among them
-% as the odd one out. For a literal @ instead, use {@} here.
+% An envelope rather than the stock \faAt. FontAwesome 4 names the "at" glyph
+% `_475`, which xdvipdfmx cannot parse into a ToUnicode entry, and it is the
+% only glyph in this CV that warns on every build. For a literal @ instead,
+% use {@} here.
 \renewcommand{\emailsymbol}{\faEnvelope}
 
 % This PDF is read in a browser tab, so it carries real document metadata:
@@ -92,7 +165,17 @@
 \hypersetup{
   pdftitle   = {Oleksandr Ponomarov - Curriculum Vitae},
   pdfauthor  = {Oleksandr Ponomarov},
-  pdfsubject = {Senior DevOps Engineer},
+  % Must stay identical to the \tagline in content/header.tex: this string is
+  % what a resume parser reads out of the document properties.
+  pdfsubject = {Senior DevOps, Platform and Site Reliability Engineer (SRE)},
+  % Document-property keywords, for the parsers that index them. Every term
+  % here is also set in visible text somewhere in the document -- this is an
+  % index of the page, not a place to claim anything the page does not.
+  pdfkeywords = {Site Reliability Engineering, SRE, Platform Engineering,
+                 DevOps, AWS, Kubernetes, Linux, Terraform, Terramate, GitOps,
+                 Argo CD, Observability, Incident Response, On-call,
+                 Infrastructure as Code, Multi-region, Multi-account,
+                 Python, Go},
   pdflang    = {en},
 }
 
@@ -102,23 +185,21 @@
 % that while url.sty still handles the line breaking.
 \urlstyle{same}
 
-% Deliberately no page numbers, even at three pages. The class sets
-% \pagestyle{empty}, and adding a footer here needs more than a pagestyle:
-% geometry's bottom=1.25cm leaves no band for one (the footer annotation
-% lands below the MediaBox), and ragged2e's finite \rightskip makes the
-% footer box underfull on every shipout. Both are fixable, but only by
-% retuning the page geometry this layout depends on.
+% Deliberately no page numbers. The class sets \pagestyle{empty}, and adding a
+% footer needs more than a pagestyle: geometry's bottom=1.25cm leaves no band
+% for one (the footer annotation lands below the MediaBox), and ragged2e's
+% finite \rightskip makes the footer box underfull on every shipout. Both are
+% fixable, but only by retuning the page geometry this layout depends on.
 
-% The class trails every contact entry with 2em. With six entries that wrapped
-% into a tidy 3+3; with four it left GitHub orphaned on a line of its own.
-% 1.5em is the widest gap that still fits all four on one line.
+% The class trails every contact entry with 2em. 1.5em is the widest gap that
+% still fits all four entries of \personalinfo on one line.
 \renewcommand{\printinfo}[2]{%
   \mbox{\textcolor{accent}{\normalfont #1}\hspace{0.5em}#2\hspace{1.5em}}}
 
 % Same glyphs and same text as the stock macros, but each contact detail is
-% now actionable for a reader who opens the CV on a screen. AltaCV v1.1.5
-% predates upstream's `withhyper` option, so they are wrapped here. \email and
-% \phone stay defined but unused, ready if a contact address is added back.
+% actionable for a reader who opens the CV on a screen. AltaCV v1.1.5 predates
+% upstream's `withhyper` option, so they are wrapped here. \email and \phone
+% stay defined but unused, ready if a contact address is added back.
 \renewcommand{\email}[1]{\printinfo{\emailsymbol}{\href{mailto:#1}{#1}}}
 \renewcommand{\phone}[1]{\printinfo{\phonesymbol}{\href{tel:#1}{#1}}}
 \renewcommand{\homepage}[1]{\printinfo{\homepagesymbol}{\href{https://#1}{#1}}}
@@ -126,3 +207,24 @@
   \printinfo{\linkedinsymbol}{\href{https://www.linkedin.com/in/#1}{#1}}}
 \renewcommand{\github}[1]{%
   \printinfo{\githubsymbol}{\href{https://github.com/#1}{#1}}}
+
+% \casestudy{a policy-defined backbone}{rebuilding-the-network-as-one-policy}
+% -> underlines the phrase and links it to the case study about it.
+%
+% The anchor is the noun phrase naming what the case study is about, set in
+% running text the way a link is written in prose: no numbers, no brackets, no
+% words added for the link's sake.
+%
+% Underline and bold stay separate signals and never overlap: bold marks a
+% measured result, underline marks a link. A phrase wearing both would be
+% claiming two different things with one piece of formatting.
+%
+% ulem rather than \underline, for two reasons: \underline is a box and will
+% not break across a line, which in a 9cm column is a guarantee of overfull
+% lines; and ulem lets the rule sit below the descenders instead of striking
+% through them. `normalem' keeps \emph italic rather than underlined.
+\usepackage[normalem]{ulem}
+\setlength{\ULdepth}{1.6pt}
+\renewcommand{\ULthickness}{0.4pt}
+\newcommand{\casestudy}[2]{%
+  \href{https://oponomarov.com/case-studies/#2/}{\uline{#1}}}

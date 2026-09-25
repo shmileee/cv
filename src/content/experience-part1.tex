@@ -1,45 +1,66 @@
-% Current and most recent roles. Margin column: sidebars/page1.
-%
-% Two Hundred is the employer; the end client is named by what it does, not
-% by name. Apple is named because disclosure is permitted.
-%
-% The two Appsilon engagements are one entry: the second was a contract
-% running alongside Two Hundred, and the overlap is stated in the bullet
-% rather than left for the reader to spot in the dates.
-%
-% Bullets name the approach, not the product: "infrastructure as code" rather
-% than Terraform, "GitOps" rather than Argo CD. A reviewer who has never used
-% the tool still understands what changed. The tools themselves land in the
-% \textbf{Core} line closing each role, which keeps every keyword in the main
-% text column where a parser reads it, and anchored to the dates it was used
-% rather than floating in a margin list of unattributed claims.
-%
-% Bold marks a measured result, never a label. Reading the bold alone should
-% return evidence -- seven seconds to 59 milliseconds, months to weeks -- and
-% a bullet with nothing measured carries no bold rather than an invented
-% number.
-
-\cvevent{Senior Site Reliability Engineer}{Two Hundred, consulting for a global SaaS leader in construction IoT}{August 2022 -- Now}{Remote, Denmark}
+\cvevent{Senior Site Reliability Engineer}{Two Hundred, consulting for an
+industrial IoT company}{August 2022 -- Now}{Remote, Denmark}
 \begin{itemize}
-\item Own the multi-account, multi-region AWS and Kubernetes platform a few hundred engineers ship through, behind a product serving thousands of requests per second. Joined when infrastructure was still changed by hand
-\item Moved infrastructure onto infrastructure as code and GitOps delivery: every change is a pull request showing the exact plan or cluster diff before approval, and the review automation behind it has run \textbf{three and a half years}. Cut the checks guarding every commit from \textbf{about seven seconds to 59 milliseconds} by rewriting the hot paths in Go and moving them from CI into the commit
-\item Built the gateway that lets AI assistants reach Argo CD, Grafana and Prometheus through the identity engineers already hold, \textbf{read-only in production and no new credentials}, and encoded change review into supervised playbooks that merge only what they prove safe
-\item Led the design and build of a cell-based architecture where one command creates a complete environment, network, cluster, identity and delivery alike, and a second destroys it, refusing to drop state until it verifies nothing still runs. Each cell is its own failure domain, so an incident cannot leave it, and a new region went from \textbf{a multi-week project to one reviewed change}
-\item Re-modeled live production networking \textbf{without changing a single running route}. Routes tracked by list position, where editing one address range could destroy and recreate a live one, moved onto explicit resources by proving an empty plan at each step, then onto a policy-defined backbone that keeps environments separated
-\item Turned the shared infrastructure code into an internal product with versioned modules, a private registry and golden paths, so teams provision their own environments instead of filing tickets. Creating a team, with repositories, chat, on-call and alerting, went from \textbf{a multi-day chore to one reviewed file}
-\item Replaced quarterly patching drills with continuous reviewed flows across container images, dependencies, cluster versions and machine images, rotating nodes in working hours rather than overnight. Brought clusters \textbf{years behind to current in six weeks} and cleared a security backlog built up over \textbf{months in a matter of weeks}
-\item Removed a company-wide vendor registry bill with an in-cloud mirror and admission-time image rewriting: no manifests edited, no migration day, and it has \textbf{held for eighteen months}. \textbf{Halved the per-gigabyte cost of the default egress path} with self-managed routing that fails back automatically, contributing the fixes upstream. Consolidated an acquisition onto the platform \textbf{in two months}, closing a second cloud account
+\item Own the multi-account, multi-region AWS and Kubernetes platform a few
+hundred engineers ship through, behind a product serving thousands of requests
+per second. Joined when infrastructure was still changed by hand.
+\item Moved infrastructure onto infrastructure as code and GitOps delivery, so
+\casestudy{every change is a pull request}{making-infrastructure-changes-boring}
+shows its exact plan or cluster diff before approval. Cut \casestudy{the checks
+guarding every commit}{a-feedback-loop-measured-in-milliseconds} from
+\textbf{120s to 59ms} by rewriting the hot paths in Go.
+\item Built \casestudy{the gateway that lets AI
+assistants}{safe-ai-tooling-for-every-developer} reach Argo CD, Grafana and
+Prometheus through community MCP servers and the identity engineers already
+hold, and encoded change review into supervised AI playbooks.
+\item Co-led \casestudy{a cell-based
+architecture}{environments-you-can-create-and-destroy-with-one-command} where
+one command creates a whole environment -- network, cluster, identity,
+delivery -- and another destroys it, refusing to drop state while anything
+still runs. Each cell is its own failure domain, and a new region went from
+\textbf{a multi-week project to one reviewed pull request}.
+\item Moved production networking onto \casestudy{a policy-defined
+backbone}{rebuilding-the-network-as-one-policy} that keeps environments
+separated.
+\item Turned the shared infrastructure code into \casestudy{an internal
+product}{turning-a-terraform-repository-into-a-product} with versioned modules,
+a private registry and golden paths, so teams provision their own environments
+instead of filing tickets. \casestudy{Creating a
+team}{teams-that-create-themselves}, with repositories, chat, on-call and
+alerting, went from \textbf{a multi-day chore to one reviewed file}.
+\item Replaced patching drills with \casestudy{continuous reviewed
+flows}{dependency-updates-from-quarterly-panic-to-background-noise} across
+container images, dependencies, cluster versions and machine images,
+\casestudy{rotating nodes in working hours}{the-fleet-that-patches-itself}
+rather than overnight. Brought clusters \textbf{years behind to current in 6
+weeks} and cleared a months-old security backlog \textbf{in weeks}.
+\item Removed a company-wide vendor registry bill with \casestudy{an in-cloud
+mirror}{leaving-docker-hub-without-anyone-noticing} and admission-time image
+rewriting: no manifests edited, no migration day, \textbf{held for 18 months}.
+\textbf{Cut default egress cost per gigabyte by 50\%} with
+\casestudy{self-managed routing}{the-nat-bill-and-the-fix-that-went-upstream}
+that fails back automatically, and \casestudy{consolidated an
+acquisition}{absorbing-an-acquisition} onto the platform \textbf{in 2 months}.
 \par\smallskip
-\textbf{Core}: AWS (EKS, Lambda, Step Functions, Cloud WAN, ECR, IAM), Kubernetes, Argo CD, Flux, Karpenter, Kyverno, Terraform, Terramate, Atlantis, GitHub Actions, pre-commit, Renovate, Vault, Kafka, MCP, Python, Go
+\textbf{Core}: AWS (EKS, Lambda, DynamoDB, ECR), Kubernetes, Argo CD,
+Terraform, Terramate, Renovate, Kafka, Flink, MCP, Go
 \end{itemize}
 
 \divider
 
-\cvevent{Infrastructure Engineer}{Appsilon, consulting for Apple and Fortune 500 pharma}{June 2021 -- March 2024}{Remote, Poland}
+\cvevent{Infrastructure Engineer}{Appsilon, consulting for Apple and Fortune 500
+pharma \textnormal{(part-time from 2022)}}{June 2021 -- March 2024}{Remote,
+Poland}
 \begin{itemize}
-\item Ran the analytics platform for one of Apple's finance departments for \textbf{eighteen months}: availability, patching, version upgrades and InfoSec compliance, on a contract overlapping the role above
-\item Designed highly available analytics platforms for Fortune 500 pharmaceutical clients on AWS and Azure, defined entirely as code, leaving a reusable base other teams used to stand up their own
-\item Migrated the company's own infrastructure to AWS, covering accounts, access, networking, budgets and alerting, with \textbf{95\% of it defined as code} and every change through a reviewed pull request
+\item Ran the analytics platform for one of Apple's finance departments for
+\textbf{18 months}: availability, patching, version upgrades and InfoSec
+compliance.
+\item Designed highly available analytics platforms for Fortune 500
+pharmaceutical clients on AWS and Azure, defined entirely as code, leaving a
+reusable base other teams used to stand up their own.
+\item Migrated the company's own infrastructure to AWS, covering accounts,
+access, networking, budgets and alerting, with \textbf{100\% of it defined as
+code} and every change through a reviewed pull request.
 \par\smallskip
 \textbf{Core}: AWS, Azure, Terraform, Ansible, Atlantis, Docker, Python
 \end{itemize}

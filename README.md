@@ -5,8 +5,10 @@ LaTeX source for my CV, published to
 
 ## Build
 
-[Tectonic](https://tectonic-typesetting.github.io) is the entire toolchain
-and mise installs it, so a fresh checkout needs nothing else.
+[Tectonic](https://tectonic-typesetting.github.io) is the whole LaTeX
+toolchain and mise installs it. The build also shells out to `python3` for a
+post-processing step, using nothing outside the standard library, so a fresh
+checkout needs no third dependency.
 
 ```sh
 mise install     # tectonic and the linters
@@ -22,7 +24,7 @@ mise run lint    # the prek hook suite
 src/       cv.tex is the skeleton; content/ and sidebars/ hold the prose.
            altacv.cls is vendored, with its local changes documented inline
 static/    redirect to the PDF, favicon and CNAME
-scripts/   the build, called by mise and CI
+scripts/   build.sh, called by mise and CI, and the ToUnicode fixup it runs
 build/     generated
 ```
 

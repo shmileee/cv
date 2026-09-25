@@ -10,9 +10,15 @@ max_line_length = 80
 trim_trailing_whitespace = true
 
 
-# Bullet text in the CV is one long logical line per point; hard wrapping it
-# would put line breaks in the middle of sentences in the generated PDF.
-[*.{tex,cls}]
+# .tex inherits the 80 above, and the bullet text is wrapped to it. A newline
+# inside a paragraph is a space to TeX, so wrapping the source changes nothing
+# in the PDF: only a blank line or an explicit \\ breaks a line in the output.
+#
+# altacv.cls is the exception, and not for typesetting reasons: it is vendored
+# from upstream v1.1.5 with one marked local change, longest line 324
+# characters. Reformatting it would be a diff against upstream to re-apply on
+# every version bump, for a file nobody edits by hand.
+[*.cls]
 max_line_length = off
 
 [*.md]
