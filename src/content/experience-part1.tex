@@ -7,35 +7,34 @@ requests per second.
 \item Co-led the move to a \casestudy{cell-based
 architecture}{environments-you-can-create-and-destroy-with-one-command} where
 one command provisions a complete environment -- network, cluster, identity
-and delivery -- and another tears it down, preserving state until all resources
-are removed. Each cell is a separate failure domain; launching a region went
+and delivery -- and another tears it down. Each cell is a separate failure domain; launching a region went
 from \textbf{a multi-week project to one reviewed pull request}.
 \item Productized shared infrastructure as an \casestudy{internal
 platform}{turning-a-terraform-repository-into-a-product} with versioned modules,
-a private registry and golden paths, replacing provisioning tickets. Reduced
+a private registry and golden paths, so teams provision without tickets. Reduced
 \casestudy{team onboarding}{teams-that-create-themselves} -- repositories,
 chat, on-call and alerting -- from \textbf{days of manual work to one reviewed
 configuration file}.
-\item Replaced manual changes with Terraform and
+\item Moved the team from manual changes to Terraform and
 \casestudy{GitOps delivery}{making-infrastructure-changes-boring}; every pull
 request includes the plan or Kubernetes diff for approval.
 Cut \casestudy{commit checks}{a-feedback-loop-measured-in-milliseconds} from
 \textbf{120s to 59ms} by rewriting hot paths in Go.
 \item Moved production networking to \casestudy{AWS Cloud
-WAN}{rebuilding-the-network-as-one-policy}, replacing approximately 15 module
+WAN}{rebuilding-the-network-as-one-policy}, replacing about 15 module
 copies with one policy that separates environments.
 \item Automated \casestudy{patch
 management}{dependency-updates-from-quarterly-panic-to-background-noise} across
 container images, dependencies, Kubernetes versions and machine images through
 reviewed updates, with \casestudy{node
 rotation}{the-fleet-that-patches-itself} during working hours. Brought clusters that were
-\textbf{years behind up to date in 6 weeks} and cleared a months-old security
-backlog \textbf{within weeks}.
+\textbf{years behind up to date in 6 weeks} and cleared the security backlog
+\textbf{within weeks}.
 \item Eliminated the company-wide vendor registry bill with an
 \casestudy{image mirror}{leaving-docker-hub-without-anyone-noticing} and
 admission-time image rewriting, without editing manifests up front or a coordinated
 migration day. The rewrite policy remained a safety net \textbf{18 months later}.
-\item \textbf{Cut default egress cost per gigabyte by 50\%} with
+\item \textbf{Cut NAT egress cost per gigabyte by 50\%} with
 \casestudy{self-managed routing}{the-nat-bill-and-the-fix-that-went-upstream}
 and automatic fallback.
 \item Led an \casestudy{acquisition migration}{absorbing-an-acquisition} onto
@@ -61,7 +60,7 @@ pharma \textnormal{(full-time to August 2022; then part-time)}}{June 2021 -- Mar
 2024}{Remote, Poland}
 \begin{itemize}
 \item Operated the analytics platform for one of Apple's finance departments for
-\textbf{18 months}: availability, patching, version upgrades and InfoSec
+18 months: availability, patching, version upgrades and InfoSec
 compliance.
 \item Designed highly available RStudio and R/Shiny platforms on AWS and
 Azure using reusable Terraform and Ansible codebases adopted by other teams.
