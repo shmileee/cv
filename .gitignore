@@ -1,6 +1,9 @@
 # The PDF, the assembled site and tectonic's logs.
 /build/
 
+# The content date, written by scripts/build.sh on every build.
+/src/build-date.tex
+
 # The original Overleaf export. src/ is the source of truth now, and a binary
 # copy of it would drift silently.
 *.zip

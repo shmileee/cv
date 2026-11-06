@@ -167,6 +167,12 @@
 % Keep URLs in the surrounding typeface while retaining URL line breaking.
 \urlstyle{same}
 
+% \builddate is the date in the page-two colophon. scripts/build.sh writes it
+% to build-date.tex from git, so the date tracks the content rather than the
+% clock. A build that bypasses the script (an editor's tectonic integration,
+% say) has no such file and falls back to today.
+\IfFileExists{build-date.tex}{\input{build-date}}{\newcommand{\builddate}{\today}}
+
 % Deliberately no page numbers. The class sets \pagestyle{empty}, and adding a
 % footer needs more than a pagestyle: geometry's bottom=1.25cm leaves no band
 % for one (the footer annotation lands below the MediaBox), and ragged2e's
