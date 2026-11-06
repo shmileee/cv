@@ -173,6 +173,39 @@
 % say) has no such file and falls back to today.
 \IfFileExists{build-date.tex}{\input{build-date}}{\newcommand{\builddate}{\today}}
 
+% \colophon{text} sets one 6pt line centred at the foot of the last page.
+%
+% It is not a page footer in the fancyhdr sense: the note on page numbers
+% above explains why the geometry leaves no band for one. Instead the line is
+% added to the page at shipout, in the kernel's background picture, hung from
+% the top-left corner in a \vtop so that no coordinate arithmetic depends on
+% which way the picture's y axis points. The baseline sits 0.7cm above the
+% paper edge, inside the 1.25cm bottom margin, so it cannot collide with the
+% text block or the sidebar whatever either of them does.
+%
+% Which page is last is learned the way the lastpage package learns it: at
+% \end{document} the page counter is written to the .aux, and the next pass
+% reads it back before the first shipout. Registering the hook from
+% \AtEndDocument instead does not work -- by then the kernel has already
+% collected the background material for the final page -- so the hook is
+% registered up front and guarded by the page number. Tectonic reruns TeX
+% when the .aux changes, so a build converges on its own.
+\providecommand{\cvlastpage}{0}
+\makeatletter
+\newcommand{\colophon}[1]{%
+  \AddToHook{shipout/background}{%
+    \ifnum\value{page}=\cvlastpage\relax
+      \put(0,0){\vtop{%
+        \vskip\dimexpr\paperheight-0.7cm\relax
+        \hbox to\paperwidth{\hfil
+          \fontsize{6}{7}\selectfont\color{body}#1\hfil}}}%
+    \fi}%
+  \AtEndDocument{%
+    \clearpage
+    \immediate\write\@auxout{%
+      \gdef\string\cvlastpage{\the\numexpr\value{page}-1\relax}}}}
+\makeatother
+
 % Deliberately no page numbers. The class sets \pagestyle{empty}, and adding a
 % footer needs more than a pagestyle: geometry's bottom=1.25cm leaves no band
 % for one (the footer annotation lands below the MediaBox), and ragged2e's
